@@ -1,0 +1,23 @@
+[33mcommit 74ed471e79d9617625ac581f350447340224ce03[m[33m ([m[1;36mHEAD -> [m[1;32mbackend[m[33m)[m
+Author: jfpanchi2 <jfpanchi2@espe.edu.ec>
+Date:   Tue Jun 9 20:28:21 2020 -0500
+
+    Creacion de Servicios
+
+[33mcommit 880bc0ddd778bd6dadaef3a6862cc9bf71b1ff91[m[33m ([m[1;31morigin/backend[m[33m)[m
+Author: jfpanchi2 <jfpanchi2@espe.edu.ec>
+Date:   Tue Jun 9 18:06:51 2020 -0500
+
+    Creacion de DAOs
+
+[33mcommit 9dc1ee90fb867e157b8bbd827a7c609c985e660a[m[33m ([m[1;31morigin/master[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmaster[m[33m)[m
+Author: Javier Llango <jallango1@espe.edu.ec>
+Date:   Sun Jun 7 17:30:46 2020 -0500
+
+    Creación de Entidades y relaciones
+
+[33mcommit 0aa87e257616fd580b0f832a6d824bbdbb3e38b3[m
+Author: jallango <55451208+Javier-llan@users.noreply.github.com>
+Date:   Sun Jun 7 17:22:52 2020 -0500
+
+    Create README.md
