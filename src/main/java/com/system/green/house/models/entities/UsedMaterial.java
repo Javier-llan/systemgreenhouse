@@ -52,15 +52,15 @@ public class UsedMaterial implements Serializable{
 		this.quantityUsed = quantityUsed;
 	}
 	
-	@JoinColumn(name="fk_material", referencedColumnName="pk_material")
+	@JoinColumn(name="fk_chemical_material", referencedColumnName="pk_chemical_material")
 	@ManyToOne
-	private Material material;
+	private ChemicalAndMaterial material;
 
-	public Material getMaterials() {
+	public ChemicalAndMaterial getMaterials() {
 		return material;
 	}
 
-	public void setMaterials(Material materials) {
+	public void setMaterials(ChemicalAndMaterial materials) {
 		this.material = materials;
 	}
 	

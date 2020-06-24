@@ -6,23 +6,24 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.system.green.house.models.dao.IUser;
-import com.system.green.house.models.entities.User;
+import com.system.green.house.models.dao.IChemicalAndMaterial;
+import com.system.green.house.models.entities.ChemicalAndMaterial;
 
 @Service
-public class UserService implements IUserService {
+public class ChemicalAndMaterialService implements IChemicalAndMaterialService{
+	
 	@Autowired 
-	private IUser dao;
+	private IChemicalAndMaterial dao;
 	
 	@Override
 	@Transactional
-	public void save(User u) {
-		dao.save(u);
+	public void save(ChemicalAndMaterial m) {
+		dao.save(m);
 	}
 
 	@Override
 	@Transactional
-	public User findById(Integer id) {
+	public ChemicalAndMaterial findById(Integer id) {
 		return dao.findById(id).get();
 	}
 
@@ -34,8 +35,8 @@ public class UserService implements IUserService {
 
 	@Override
 	@Transactional
-	public List<User> findAll() {
-		return (List<User>) dao.findAll();
+	public List<ChemicalAndMaterial> findAll() {
+		return (List<ChemicalAndMaterial>) dao.findAll();
 	}
 
 }

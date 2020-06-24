@@ -13,17 +13,21 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
-@Table(name="materials")
-public class Material implements Serializable{
+@Table(name="chemical_and_materials")
+public class ChemicalAndMaterial implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Basic(optional=false)
-	@Column(name="pk_material")
-	private Integer idmaterial;
+	@Column(name="pk_chemical_material")
+	private Integer idchemicalAndMaterial;
 	
 	@Column(name="type_material")
 	private String typeMaterial;
@@ -37,9 +41,14 @@ public class Material implements Serializable{
 	@Column(name="quantity_material")
 	private String quantityMaterial;
 	
+	@Column(name="unit_measure")
+	private String unitMeasue;
+	
 	@Column(name="price_buy")
 	private Double priceBuy;
 	
+	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(pattern = "yyyy-MM-dd")	
 	@Column(name="date_buy")
 	private Calendar dateBuy;
 	
@@ -49,22 +58,24 @@ public class Material implements Serializable{
 	@Column(name="commentary")
 	private String commentary;
 	
-	public Material() {
+	public ChemicalAndMaterial() {
 		super();
 		
 	}
 	
-	public Material(Integer id) {
+	public ChemicalAndMaterial(Integer id) {
 		super();
-		this.idmaterial=id;
+		this.idchemicalAndMaterial=id;
 	}
 
-	public Integer getIdmaterial() {
-		return idmaterial;
+	
+
+	public Integer getIdchemicalandmaterial() {
+		return idchemicalAndMaterial;
 	}
 
-	public void setIdmaterial(Integer idmaterial) {
-		this.idmaterial = idmaterial;
+	public void setIdchemicalandmaterial(Integer idchemicalandmaterial) {
+		this.idchemicalAndMaterial = idchemicalandmaterial;
 	}
 
 	public String getTypeMaterial() {
@@ -132,6 +143,17 @@ public class Material implements Serializable{
 	}
 
 	
+	public String getUnitMeasue() {
+		return unitMeasue;
+	}
+
+	public void setUnitMeasue(String unitMeasue) {
+		this.unitMeasue = unitMeasue;
+	}
+
+
+
+
 	@OneToMany(mappedBy="material", fetch=FetchType.LAZY)
 	private List<UsedMaterial>usedMaterial;
 
@@ -142,6 +164,19 @@ public class Material implements Serializable{
 	public void setUsedMaterial(List<UsedMaterial> usedMaterial) {
 		this.usedMaterial = usedMaterial;
 	}
+	
+	@OneToMany(mappedBy="material", fetch=FetchType.LAZY)
+	private List<ChemicalUsed>chemicalUsed;
+
+	public List<ChemicalUsed> getChemicalUsed() {
+		return chemicalUsed;
+	}
+
+	public void setChemicalUsed(List<ChemicalUsed> chemicalUsed) {
+		this.chemicalUsed = chemicalUsed;
+	}
+
+	
 
 		
 }

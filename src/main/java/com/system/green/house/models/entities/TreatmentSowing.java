@@ -2,15 +2,18 @@ package com.system.green.house.models.entities;
 
 import java.io.Serializable;
 import java.util.Calendar;
+import java.util.List;
 
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -97,5 +100,19 @@ public class TreatmentSowing implements Serializable{
 	public void setSowings(Sowing sowings) {
 		this.sowing = sowings;
 	}
-		
+	
+	
+	@OneToMany(mappedBy="treatmentSowings", fetch=FetchType.LAZY)
+	private List<ChemicalUsed>chemicalUsed;
+
+
+	public List<ChemicalUsed> getChemicalUsed() {
+		return chemicalUsed;
+	}
+
+	public void setChemicalUsed(List<ChemicalUsed> chemicalUsed) {
+		this.chemicalUsed = chemicalUsed;
+	}
+
+	
 }

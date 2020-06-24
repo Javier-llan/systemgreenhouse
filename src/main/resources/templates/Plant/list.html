@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout :: frgHead"></head>
+<body>
+<div id="wrapper">
+	<header th:replace="layout :: frgHeader"></header>
+	<div id="content-wrapper" class="d-flex flex-column">
+		<!-- Begin Page Content -->
+		<div class="container">
+			<div class="container-fluid">				
+				<br />
+		<div class="card col-md-12">
+			<div class="card-body">
+				<div class="form-group row">
+					<div class="content col-sm-1">
+						<i class="far fa-plus-square fa-2x"></i>
+					</div>
+					<h3 class="card-title col-sm-10" th:text="${title}"></h3>
+				</div>
+				<hr />
+				<table class="table table-hover">
+					<thead>
+						<tr>
+								<th>Nombre</th>
+								<th>Tipo</th>
+								<th>Variedad</th>
+								<th>Condicion</th>
+								<th>Descripcion</th>
+								<th>Comentario</th>
+								<th><a class="btn btn-sm btn-success"
+									th:href="@{/plant/create}">&nbsp;Nuevo</a></th>
+						</tr>
+					</thead>
+					<tbody>						
+						<tr th:each="plant : ${plants}">
+								<td th:text=${plant.namePlant}></td>
+								<td th:text=${plant.typePlant}></td>
+								<td th:text=${plant.varietyPlant}></td>
+								<td th:text=${plant.conditionPlant}></td>
+								<td th:text=${plant.descriptionPlant}></td>
+								<td th:text=${plant.commentary}></td>
+								<td><a class="btn btn-sm btn-warning"
+									th:href="@{/plant/update/} + ${plant.idplant}">&nbsp;Actualizar</a>
+									<a class="btn btn-sm btn-info"
+									th:href="@{/plant/retrieve/} + ${plant.idplant}">&nbsp;Consultar</a>
+								</td>
+							</tr>
+					
+					</tbody>
+				</table>
+			</div>
+		</div>
+			</div>
+			<footer th:replace="layout :: frgFooter"></footer>
+		</div>
+	</div>
+</div>
+</body>
+</html>

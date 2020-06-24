@@ -138,13 +138,6 @@ public class Sowing implements Serializable{
 	@OneToMany(mappedBy = "sowing",fetch = FetchType.LAZY)
 	private List<TreatmentSowing> treatmentsSowing;
 
-	public GreenHouse getGreenHouses() {
-		return greenHouses;
-	}
-
-	public void setGreenHouses(GreenHouse greenHouses) {
-		this.greenHouses = greenHouses;
-	}
 
 	public List<TreatmentSowing> getTreatmentsSowing() {
 		return treatmentsSowing;

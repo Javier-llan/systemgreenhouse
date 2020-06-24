@@ -29,7 +29,7 @@ public class GreenHouse implements Serializable{
 	private String nameGreenHouse;
 	
 	@Column(name="dimension_green_house")
-	private Double dimensioGreenHouse;
+	private Double dimensionGreenHouse;
 	
 	@Column(name="condition_green_house")
 	private String conditionGreenHouse;
@@ -41,7 +41,7 @@ public class GreenHouse implements Serializable{
 	private Integer caliberCanal;
 	
 	@Column(name="commentary_green_house")
-	private String greenHouse;
+	private String commentary;
 	
 	public GreenHouse() {
 		super();
@@ -68,12 +68,12 @@ public class GreenHouse implements Serializable{
 		this.nameGreenHouse = nameGreenHouse;
 	}
 
-	public Double getDimensioGreenHouse() {
-		return dimensioGreenHouse;
+	public Double getDimensionGreenHouse() {
+		return dimensionGreenHouse;
 	}
 
-	public void setDimensioGreenHouse(Double dimensioGreenHouse) {
-		this.dimensioGreenHouse = dimensioGreenHouse;
+	public void setDimensionGreenHouse(Double dimensioGreenHouse) {
+		this.dimensionGreenHouse = dimensioGreenHouse;
 	}
 
 	public String getConditionGreenHouse() {
@@ -100,14 +100,18 @@ public class GreenHouse implements Serializable{
 		this.caliberCanal = caliberCanal;
 	}
 
-	public String getGreenHouse() {
-		return greenHouse;
+	
+	
+	public String getCommentary() {
+		return commentary;
 	}
 
-	public void setGreenHouse(String greenHouse) {
-		this.greenHouse = greenHouse;
+	public void setCommentary(String commentary) {
+		this.commentary = commentary;
 	}
-	
+
+
+
 	@OneToMany(mappedBy="greenHouse", fetch=FetchType.LAZY)
 	private List<MaintenanceGreenHouse> maintenancesGreenHouse;
 
