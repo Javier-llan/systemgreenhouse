@@ -1,5 +1,9 @@
 package com.system.green.house.controllers;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +14,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
@@ -59,7 +65,7 @@ public class ChemicalAndMaterialController {
 	}
 	
 	@PostMapping(value="/save")
-	public String save( ChemicalAndMaterial chemicalAndMaterials, BindingResult result,Model model, RedirectAttributes flash ) {
+	public String save( ChemicalAndMaterial chemicalAndMaterials, BindingResult result,Model model,@RequestParam("photo_qm") MultipartFile image, RedirectAttributes flash ) {
 		try {
 			if(result.hasErrors()) {
 				if(chemicalAndMaterials.getIdchemicalandmaterial()==null) {
@@ -68,6 +74,22 @@ public class ChemicalAndMaterialController {
 					model.addAttribute("title","Update Record");
 				}
 				return "chemicalandmaterial/form";
+			}
+			if (!image.isEmpty()) {
+
+				Path dir = Paths.get("src//main//resources//static//photos_qms");
+				String rootPath = dir.toFile().getAbsolutePath();
+
+				try {
+
+					byte[] bytes = image.getBytes();
+					Path rutaCompleta = Paths.get(rootPath + "//" + image.getOriginalFilename());
+					Files.write(rutaCompleta, bytes);
+					chemicalAndMaterials.setImage_chemicalmaterial(image.getOriginalFilename());
+
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
 			}
 			srvChemicalAndMaterial.save(chemicalAndMaterials);
 			flash.addAttribute("succes","The record was saved successfull ");

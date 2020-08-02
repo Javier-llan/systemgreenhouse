@@ -21,15 +21,15 @@
 				<table class="table table-hover">
 					<thead>
 						<tr>
-								<th>Tipo</th>
-								<th>Nombre</th>
-								<th>Descripcion</th>
-								<th>Cantidad</th>
-								<th>Precio</th>
-								<th>Fecha</th>
-								<th>Condicion</th>
-								<th>Unidad de Medida</th>
-								<th>Comentario</th>
+								
+								<th><i class="fas fa-atom"></i>&nbsp;Nombre</th>
+								<th><i class="fas fa-flask"></i>&nbsp;Tipo </th>
+								<th><i class="fas fa-calculator"></i>&nbsp;Cantidad</th>
+								<th><i class="fas fa-boxes"></i>&nbsp;Unidad</th>
+								<th><i class="fas fa-money-bill-alt"></i>&nbsp;Precio</th>
+								<th><i class="fas fa-calendar-alt"></i>	&nbsp;Fecha</th>
+								<th><i class="fas fa-clipboard-check"></i>&nbsp;Condici&oacute;n</th>
+								
 								<th><a class="btn btn-sm btn-success"
 									th:href="@{/chemicalandmaterial/create}">&nbsp;Nuevo</a></th>
 						</tr>
@@ -38,13 +38,12 @@
 						<tr th:each="chemicalAndMaterial : ${chemicalAndMaterials}">
 								<td th:text=${chemicalAndMaterial.nameMaterial}></td>
 								<td th:text=${chemicalAndMaterial.typeMaterial}></td>
-								<td th:text=${chemicalAndMaterial.descriptionMaterial}></td>
 								<td th:text=${chemicalAndMaterial.quantityMaterial}></td>
+								<td th:text=${chemicalAndMaterial.unitMeasue}></td>
 								<td th:text=${chemicalAndMaterial.priceBuy}></td>
 								<td th:text="${#dates.format(chemicalAndMaterial.dateBuy,'dd-MM-yyy')}"></td>
 								<td th:text=${chemicalAndMaterial.conditionStock}></td>
-								<td th:text=${chemicalAndMaterial.unitMeasue}></td>
-								<td th:text=${chemicalAndMaterial.commentary}></td>
+									
 								<td><a class="btn btn-sm btn-warning"
 									th:href="@{/chemicalandmaterial/update/} + ${chemicalAndMaterial.idchemicalandmaterial}">&nbsp;Actualizar</a>
 									<a class="btn btn-sm btn-info"

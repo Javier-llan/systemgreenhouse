@@ -1,5 +1,9 @@
 package com.system.green.house.controllers;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +14,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.system.green.house.models.entities.Plant;
@@ -58,7 +64,7 @@ public class PlantController {
 	}
 	
 	@PostMapping(value="/save")
-	public String save( Plant plants, BindingResult result,Model model, RedirectAttributes flash ) {
+	public String save( Plant plants, BindingResult result,Model model,@RequestParam("photo_plant") MultipartFile image, RedirectAttributes flash ) {
 		try {
 			if(result.hasErrors()) {
 				if(plants.getIdplant()==null) {
@@ -68,6 +74,25 @@ public class PlantController {
 				}
 				return "plant/form";
 			}
+			
+			if (!image.isEmpty()) {
+
+				Path dir = Paths.get("src//main//resources//static//photos_plants");
+				String rootPath = dir.toFile().getAbsolutePath();
+
+				try {
+
+					byte[] bytes = image.getBytes();
+					Path rutaCompleta = Paths.get(rootPath + "//" + image.getOriginalFilename());
+					Files.write(rutaCompleta, bytes);
+					plants.setImage_plant(image.getOriginalFilename());
+
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+			
+			
 			srvPlant.save(plants);
 			flash.addAttribute("succes","The record was saved successfull ");
 		} catch (Exception e) {

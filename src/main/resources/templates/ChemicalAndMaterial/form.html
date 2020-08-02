@@ -17,20 +17,20 @@
 					</div>
 					<h3 class="card-title col-sm-10" th:text="${title}"></h3>					
 				</div>
-			//Formulario	
-				<form th:action="@{/chemicalandmaterial/save}" th:object="${chemicalAndMaterial}" method="post">
+			Formulario	
+				<form th:action="@{/chemicalandmaterial/save}" th:object="${chemicalAndMaterial}" enctype="multipart/form-data" method="post">
 				
 			
-				 			
+				<div class="row d-flex align-items-center">				
 				  <div class="form-group row">
-						<div class="content col-sm-3">
-							<i class="fas fa-info-circle"></i>
-							<label class="h5 col-form-label">&nbsp;Tipo de Material:</label>						
+						<div class="content col-1">
+							<i class="fas fa-flask"></i>										
 						</div>
-						<div class="content col-sm-6">							
+						<div class="content col-10">							
 							<input class="form-control" type="text" 
 								th:field="*{typeMaterial}"
-								th:errorclass="'form-control is-invalid'" />
+								th:errorclass="'form-control is-invalid'"
+								placeholder="Tipo de Material"  />
 							<small class="invalid-feedback"
 								th:if="${#fields.hasErrors('typeMaterial')}"
 								th:errors="*{typeMaterial}"></small>										
@@ -39,17 +39,17 @@
 					</div> 
 					
 					
-					<hr />
+					<br />
 					
 					  <div class="form-group row">
-						<div class="content col-sm-3">
-							<i class="fas fa-info-circle"></i>
-							<label class="h5 col-form-label">&nbsp;Nombre del Material:</label>						
+						<div class="content col-sm-1">
+							<i class="fas fa-atom"></i>						
 						</div>
-						<div class="content col-sm-6">							
+						<div class="content col-sm-10">							
 							<input class="form-control" type="text" 
 								th:field="*{nameMaterial}"
-								th:errorclass="'form-control is-invalid'" />
+								th:errorclass="'form-control is-invalid'" 
+								placeholder="Nombre del Material"/>
 							<small class="invalid-feedback"
 								th:if="${#fields.hasErrors('nameMaterial')}"
 								th:errors="*{nameMaterial}"></small>										
@@ -57,17 +57,17 @@
 						</div>
 					</div> 
 					
-					<hr />
+					<br />
 					
 					  <div class="form-group row">
-						<div class="content col-sm-3">
-							<i class="fas fa-info-circle"></i>
-							<label class="h5 col-form-label">&nbsp;Descripcion del Material:</label>						
+						<div class="content col-sm-1">
+							<i class="fas fa-prescription-bottle"></i>												
 						</div>
-						<div class="content col-sm-6">							
+						<div class="content col-sm-10">							
 							<input class="form-control" type="text" 
 								th:field="*{descriptionMaterial}"
-								th:errorclass="'form-control is-invalid'" />
+								th:errorclass="'form-control is-invalid'"
+								placeholder="Descripci&oacute;n del Material" />
 							<small class="invalid-feedback"
 								th:if="${#fields.hasErrors('descriptionMaterial')}"
 								th:errors="*{descriptionMaterial}"></small>										
@@ -75,17 +75,18 @@
 						</div>
 					</div> 
 					
-					<hr />
+					</div>
 					
+				<div class="row d-flex align-items-center">		
 					  <div class="form-group row">
-						<div class="content col-sm-3">
-							<i class="fas fa-info-circle"></i>
-							<label class="h5 col-form-label">&nbsp;Cantidad:</label>						
+						<div class="content col-sm-1">
+							<i class="fas fa-calculator"></i>							
 						</div>
-						<div class="content col-sm-6">							
+						<div class="content col-sm-10">							
 							<input class="form-control" type="number" 
 								th:field="*{quantityMaterial}"
-								th:errorclass="'form-control is-invalid'" />
+								th:errorclass="'form-control is-invalid'"
+								placeholder="Cantidad" />
 							<small class="invalid-feedback"
 								th:if="${#fields.hasErrors('quantityMaterial')}"
 								th:errors="*{quantityMaterial}"></small>										
@@ -93,17 +94,18 @@
 						</div>
 					</div> 
 					
-					<hr />
+					<br/>
 					
 					  <div class="form-group row">
-						<div class="content col-sm-3">
-							<i class="fas fa-info-circle"></i>
-							<label class="h5 col-form-label">&nbsp;Unidad de Medida:</label>						
+						<div class="content col-sm-1">
+							<i class="fas fa-boxes"></i>						
 						</div>
-						<div class="content col-sm-6">							
-							<input class="form-control" type="text" 
-								th:field="*{unitMeasue}"
-								th:errorclass="'form-control is-invalid'" />
+						<div class="content col-sm-10">							
+							<select class="form-control" th:field="*{unitMeasue}"
+								      th:errorclass="'form-control is-invalid'">
+									  <option value="Kilogramos">Kil&oacute;gramos</option>
+									  <option value="Gramos">Gramos</option>			
+      						 </select>
 							<small class="invalid-feedback"
 								th:if="${#fields.hasErrors('unitMeasue')}"
 								th:errors="*{unitMeasue}"></small>										
@@ -111,17 +113,18 @@
 						</div>
 					</div> 
 					
-					<hr />
+					<br/>
 					
 					  <div class="form-group row">
-						<div class="content col-sm-3">
-							<i class="fas fa-info-circle"></i>
-							<label class="h5 col-form-label">&nbsp;Precio de Compra:</label>						
+						<div class="content col-sm-1">
+							<i class="fas fa-money-bill-alt"></i>
+													
 						</div>
-						<div class="content col-sm-6">							
+						<div class="content col-sm-10">							
 							<input class="form-control" type="number" 
 								th:field="*{priceBuy}"
-								th:errorclass="'form-control is-invalid'" />
+								th:errorclass="'form-control is-invalid'"
+								placeholder="Precio de Compra"/>
 							<small class="invalid-feedback"
 								th:if="${#fields.hasErrors('priceBuy')}"
 								th:errors="*{priceBuy}"></small>										
@@ -129,17 +132,19 @@
 						</div>
 					</div> 
 					
-					<hr />
+					</div>
 					
+					<div class="row d-flex align-items-center">		
 					  <div class="form-group row">
-						<div class="content col-sm-3">
-							<i class="fas fa-info-circle"></i>
-							<label class="h5 col-form-label">&nbsp;Condicion:</label>						
+						<div class="content col-sm-1">
+							<i class="fas fa-clipboard-check"></i>
+													
 						</div>
-						<div class="content col-sm-6">							
+						<div class="content col-sm-10">							
 							<input class="form-control" type="number" 
 								th:field="*{conditionStock}"
-								th:errorclass="'form-control is-invalid'" />
+								th:errorclass="'form-control is-invalid'" 
+								placeholder="Condici&oacute;n"/>
 							<small class="invalid-feedback"
 								th:if="${#fields.hasErrors('conditionStock')}"
 								th:errors="*{conditionStock}"></small>										
@@ -147,17 +152,17 @@
 						</div>
 					</div> 
 					
-				<hr />
+				<br />
 					
 					  <div class="form-group row">
-						<div class="content col-sm-3">
-							<i class="fas fa-info-circle"></i>
-							<label class="h5 col-form-label">&nbsp;Fecha de Compra:</label>						
+						<div class="content col-sm-1">
+							<i class="fas fa-calendar-alt"></i>						
 						</div>
-						<div class="content col-sm-6">							
+						<div class="content col-sm-10">							
 							<input class="form-control" type="date" 
 								th:field="*{dateBuy}"
-								th:errorclass="'form-control is-invalid'" />
+								th:errorclass="'form-control is-invalid'"
+								placeholder="Fecha de Compra" />
 							<small class="invalid-feedback"
 								th:if="${#fields.hasErrors('dateBuy')}"
 								th:errors="*{dateBuy}"></small>										
@@ -166,26 +171,38 @@
 					
 					
 					
-					
-					<hr />
+					<br />
 					
 					  <div class="form-group row">
-						<div class="content col-sm-3">
+						<div class="content col-sm-1">
 							<i class="fas fa-info-circle"></i>
-							<label class="h5 col-form-label">&nbsp;Comentario:</label>						
+													
 						</div>
-						<div class="content col-sm-6">							
+						<div class="content col-sm-10">							
 							<input class="form-control" type="text" 
 								th:field="*{commentary}"
-								th:errorclass="'form-control is-invalid'" />
+								th:errorclass="'form-control is-invalid'"
+								placeholder="Comentario" />
 							<small class="invalid-feedback"
 								th:if="${#fields.hasErrors('commentary')}"
 								th:errors="*{commentary}"></small>										
 
 						</div>
+						</div>
+						<br />
+						<div class="form-group row">
+						<div class="content col-1">
+							<i class="far fa-image fa-2x"></i>					
+						</div>
+						<div class="content col-10">
+							<input type="file" name="photo_qm" id="photo_qm" class="form-control">								
+						</div>
+						
 					</div> 
 					
-					<hr />
+					</div>
+					
+					
 			
 					
 					<div class="form-group row">

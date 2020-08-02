@@ -47,6 +47,9 @@ public class ChemicalAndMaterial implements Serializable{
 	@Column(name="price_buy")
 	private Double priceBuy;
 	
+	@Column(name = "image_chemicalmaterial")
+	private String image_chemicalmaterial;
+	
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern = "yyyy-MM-dd")	
 	@Column(name="date_buy")
@@ -151,7 +154,13 @@ public class ChemicalAndMaterial implements Serializable{
 		this.unitMeasue = unitMeasue;
 	}
 
+	public String getImage_chemicalmaterial() {
+		return image_chemicalmaterial;
+	}
 
+	public void setImage_chemicalmaterial(String image_chemicalmaterial) {
+		this.image_chemicalmaterial = image_chemicalmaterial;
+	}
 
 
 	@OneToMany(mappedBy="material", fetch=FetchType.LAZY)

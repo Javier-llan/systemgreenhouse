@@ -13,22 +13,73 @@
 		<div class="card col-md-12">
 			<div class="card-body">
 				<div class="form-group row">
-					<div class="content col-sm-1">
-						<i class="fas fa-info-circle"></i>
-					</div>
-					<h3 class="card-title col-sm-6" >
-					<div>
-					            <p th:text=${chemicalAndMaterial.nameMaterial}></p>
-								<p th:text=${chemicalAndMaterial.typeMaterial}></p>
-								<p th:text=${chemicalAndMaterial.descriptionMaterial}></p>
-								<p th:text=${chemicalAndMaterial.quantityMaterial}></p>
-								<p th:text=${chemicalAndMaterial.priceBuy}></p>
-								<p th:text="${#dates.format(chemicalAndMaterial.dateBuy,'dd-MM-yyy')}"></p>
-								<p th:text=${chemicalAndMaterial.conditionStock}></p>
-								<p th:text=${chemicalAndMaterial.unitMeasue}></p>
-								<p th:text=${chemicalAndMaterial.commentary}></p>
-					</div>
-					</h3>
+					
+							
+					<div class="card-columns">
+									<div class="card bg-light">
+										<i class="fas fa-atom fa-2x"></i>	
+										<div class="card-body text-center">
+											<p th:text=${chemicalAndMaterial.nameMaterial}></p>
+										</div>
+									</div>
+									<div class="card bg-light">
+										<i class="fas fa-flask fa-2x"></i>
+										<div class="card-body text-center">
+											<p th:text=${chemicalAndMaterial.typeMaterial}></p>
+										</div>
+									</div>
+									<div class="card bg-light">
+										<i class="fas fa-prescription-bottle fa-2x"></i>
+										<div class="card-body text-center">
+											<p th:text=${chemicalAndMaterial.descriptionMaterial}></p>
+										</div>
+									</div>
+									<div class="card bg-light">
+										<i class="fas fa-calculator fa-2x"></i>	
+										<div class="card-body text-center">
+											<p th:text=${chemicalAndMaterial.quantityMaterial}></p>
+										</div>
+									</div>
+									<div class="card bg-light">
+										<i class="fas fa-boxes fa-2x"></i>
+										<div class="card-body text-center">				
+											<p th:text=${chemicalAndMaterial.unitMeasue}></p>
+										</div>
+									</div>
+									<div class="card bg-light">
+										<i class="fas fa-money-bill-alt fa-2x"></i>
+										<div class="card-body text-center">
+											<p th:text=${chemicalAndMaterial.priceBuy}></p>
+										</div>
+									</div>	
+									<div class="card bg-light">
+										<i class="fas fa-calendar-alt fa-2x"></i>	
+										<div class="card-body text-center">
+											<p th:text="${#dates.format(chemicalAndMaterial.dateBuy,'dd-MM-yyy')}"></p>
+										</div>
+									</div>			
+									<div class="card bg-light">
+										<i class="fas fa-clipboard-check fa-2x" ></i>
+										<div class="card-body text-center">
+											<p th:text=${chemicalAndMaterial.conditionStock}></p>
+										</div>
+									</div>				
+									<div class="card bg-light">
+										<i class="fas fa-info-circle fa-2x"></i>
+										<div class="card-body text-center">
+											<p th:text=${chemicalAndMaterial.commentary}></p>
+										</div>
+									</div>
+									<div class="card bg-light" >
+										<i class="far fa-image fa-2x"></i>
+										<div class="card-body">
+											
+												<img class="card-img" th:src="@{/photos_qms/} + ${chemicalAndMaterial.image_chemicalmaterial}" width="80"
+													height="80" />
+											
+										</div>
+									</div>
+								</div>
 					
 					
 					<div class="col-sm-4">

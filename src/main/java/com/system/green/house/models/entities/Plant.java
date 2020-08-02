@@ -43,6 +43,9 @@ public class Plant implements Serializable{
 	@Column(name="commentary")
 	private String commentary;
 	
+	@Column(name = "image_plant")
+	private String image_plant;
+	
 	public Plant() {
 		super();
 	}
@@ -108,6 +111,14 @@ public class Plant implements Serializable{
 		this.commentary = commentary;
 	}
 	
+	public String getImage_plant() {
+		return image_plant;
+	}
+
+	public void setImage_plant(String image_plant) {
+		this.image_plant = image_plant;
+	}
+
 	@OneToMany(mappedBy="plants",fetch=FetchType.LAZY)
 	private List<Sowing> sowing;
 
