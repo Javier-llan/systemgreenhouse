@@ -8,7 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 
 @MappedSuperclass
-public abstract class  People {
+public abstract class People {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
