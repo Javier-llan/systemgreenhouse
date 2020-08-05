@@ -18,6 +18,8 @@ import javax.persistence.TemporalType;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name="chemical_and_materials")
 public class ChemicalAndMaterial implements Serializable{
@@ -72,13 +74,12 @@ public class ChemicalAndMaterial implements Serializable{
 	}
 
 	
-
-	public Integer getIdchemicalandmaterial() {
+	public Integer getIdchemicalAndMaterial() {
 		return idchemicalAndMaterial;
 	}
 
-	public void setIdchemicalandmaterial(Integer idchemicalandmaterial) {
-		this.idchemicalAndMaterial = idchemicalandmaterial;
+	public void setIdchemicalAndMaterial(Integer idchemicalAndMaterial) {
+		this.idchemicalAndMaterial = idchemicalAndMaterial;
 	}
 
 	public String getTypeMaterial() {
@@ -162,8 +163,8 @@ public class ChemicalAndMaterial implements Serializable{
 		this.image_chemicalmaterial = image_chemicalmaterial;
 	}
 
-
-	@OneToMany(mappedBy="material", fetch=FetchType.LAZY)
+	@JsonIgnore
+	@OneToMany(mappedBy="materialsGreenHouse", fetch=FetchType.LAZY)
 	private List<UsedMaterial>usedMaterial;
 
 	public List<UsedMaterial> getUsedMaterial() {
@@ -173,7 +174,8 @@ public class ChemicalAndMaterial implements Serializable{
 	public void setUsedMaterial(List<UsedMaterial> usedMaterial) {
 		this.usedMaterial = usedMaterial;
 	}
-	
+
+	@JsonIgnore
 	@OneToMany(mappedBy="material", fetch=FetchType.LAZY)
 	private List<ChemicalUsed>chemicalUsed;
 

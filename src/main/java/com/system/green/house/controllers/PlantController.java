@@ -10,16 +10,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.system.green.house.models.entities.Plant;
 import com.system.green.house.models.services.IPlantService;
+
 
 @RequestMapping(value="/plant")
 @Controller
@@ -31,7 +34,7 @@ public class PlantController {
 	@GetMapping(value="/create")
 	public String create(Model model) {
 		Plant plants = new Plant();
-		model.addAttribute("title","New Record for plant");
+		model.addAttribute("title","Nuevo registro para planta");
 		model.addAttribute("plant",plants);
 		return "plant/form";
 	}
@@ -47,7 +50,7 @@ public class PlantController {
 	public String update(@PathVariable(value="id") Integer id, Model model) {
 		Plant plants = srvPlant.findById(id);
 		model.addAttribute("plant", plants);
-		model.addAttribute("title","Register update");
+		model.addAttribute("title","Actualización de registro");
 		return "plant/form";
 	}
 	
@@ -55,58 +58,62 @@ public class PlantController {
 	public String delete(@PathVariable(value="id") Integer id, Model model, RedirectAttributes flash) {
 		try {
 			srvPlant.delete(id);
-			flash.addAttribute("success","The record was deleted");
+			flash.addFlashAttribute("success","El registro fue eliminado");
 		} catch (Exception e) {
-			flash.addAttribute("error","The record cannot be deleted");
+			flash.addFlashAttribute("error","El registro no puede ser eliminado");
 		}
 		
 		return "redirect:/plant/list";
 	}
 	
-	@PostMapping(value="/save")
-	public String save( Plant plants, BindingResult result,Model model,@RequestParam("photo_plant") MultipartFile image, RedirectAttributes flash ) {
+	@PostMapping(value="/save") 
+	public String save(@Validated Plant plant, BindingResult result, Model model,
+			@RequestParam("photo_plant") MultipartFile image,
+			SessionStatus status, RedirectAttributes flash) {
 		try {
+			
+			String message = "Planta agregado correctamente";
+			String titulo = "Nuevo registro de Planta";
+			
+			if(plant.getIdplant() != null) {
+				message = "Planta actualizada correctamente";
+				titulo = "Actualizando el registro de " + plant;
+			}
+						
 			if(result.hasErrors()) {
-				if(plants.getIdplant()==null) {
-					model.addAttribute("title","New record");
-				}else {
-					model.addAttribute("title","Update Record");
-				}
-				return "plant/form";
+				model.addAttribute("title", titulo);							
+				return "plant/form";				
 			}
 			
-			if (!image.isEmpty()) {
-
+			if (!image.isEmpty()) {				
 				Path dir = Paths.get("src//main//resources//static//photos_plants");
 				String rootPath = dir.toFile().getAbsolutePath();
-
 				try {
-
 					byte[] bytes = image.getBytes();
 					Path rutaCompleta = Paths.get(rootPath + "//" + image.getOriginalFilename());
 					Files.write(rutaCompleta, bytes);
-					plants.setImage_plant(image.getOriginalFilename());
+					plant.setImage_plant(image.getOriginalFilename());
 
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
-			}
-			
-			
-			srvPlant.save(plants);
-			flash.addAttribute("succes","The record was saved successfull ");
-		} catch (Exception e) {
-			// TODO: handle exception
-			flash.addAttribute("error", "The record cannot be saved");
+			}													
+			srvPlant.save(plant);	
+			status.setComplete();
+			flash.addFlashAttribute("success", message);
 		}
+		catch(Exception ex) {
+			flash.addFlashAttribute("error", ex.getMessage());
+		}				
 		return "redirect:/plant/list";
 	}
+	
 	
 	@GetMapping(value="/list")
 	public String list(Model model) {
 		List<Plant> plants = srvPlant.findAll();
 		model.addAttribute("plants", plants);
-		model.addAttribute("title", "List of Plants");
+		model.addAttribute("title", "Listado de plantas");
 		return "plant/list";
 	}
 }

@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.system.green.house.models.entities.ChemicalAndMaterial;
-
 import com.system.green.house.models.entities.MaintenanceGreenHouse;
 import com.system.green.house.models.entities.UsedMaterial;
 import com.system.green.house.models.services.ChemicalAndMaterialService;
@@ -37,7 +36,7 @@ public class UsedMaterialController {
 	@GetMapping(value="/create")
 	public String create(Model model) {
 		UsedMaterial usedMaterials = new UsedMaterial();
-		model.addAttribute("title","Register for Chemical useds");
+		model.addAttribute("title","Registro de materiales y quimicos usados");
 		model.addAttribute("usedMaterial",usedMaterials);
 		List<ChemicalAndMaterial> chemicalMaterials = srvChemicalAndMaterial.findAll();
 		model.addAttribute("chemicalAndMaterials",chemicalMaterials);
@@ -50,13 +49,13 @@ public class UsedMaterialController {
 	public String retrieve(@PathVariable(value="id") Integer id, Model model) {
 		UsedMaterial usedMaterials= srvUsedMaterial.findById(id);
 		model.addAttribute("usedMaterial", usedMaterials);
-		return "usedmaterial/form";
+		return "usedmaterial/card";
 	}
 	
 	@GetMapping(value="/create/{i}")
 	public String create(@PathVariable(value="id")Integer id, Model model) {
 		UsedMaterial usedMaterials = srvUsedMaterial.findById(id);
-		model.addAttribute("title","Register for new Chemical used");
+		model.addAttribute("title","Registro para nuevo material y quimico");
 		model.addAttribute("usedMaterial",usedMaterials);
 		List<ChemicalAndMaterial> chemicalAndMaterials = srvChemicalAndMaterial.findAll();
 		model.addAttribute("chemicalAndMaterials",chemicalAndMaterials);
@@ -68,8 +67,8 @@ public class UsedMaterialController {
 	@GetMapping(value="/update/{id}")
 	public String update(@PathVariable(value="id") Integer id, Model model) {
 		UsedMaterial usedMaterials = srvUsedMaterial.findById(id);
-		model.addAttribute("title","Register update");
-		model.addAttribute("chemicalUsed",usedMaterials);
+		model.addAttribute("title","Actualización  de Registro");
+		model.addAttribute("usedMaterial",usedMaterials);
 		List<ChemicalAndMaterial> chemicalAndMaterials=srvChemicalAndMaterial.findAll();
 		model.addAttribute("chemicalAndMaterials",chemicalAndMaterials);
 		List<MaintenanceGreenHouse> maintenanceGreenHouses=srvMaintenanceGreenHouse.findAll();
@@ -80,25 +79,32 @@ public class UsedMaterialController {
 
 	@PostMapping(value="/save")
 	public String save(@Validated UsedMaterial usedMaterials, BindingResult result, Model model, RedirectAttributes flash) {
-		try {
+try {
+			
+			String message = "Material usado agregado correctamente";
+			String titulo = "Nuevo registro de usos de materiales";
+			
+			if(usedMaterials.getIdMaterialUsed() != null) {
+				message = "Mantenimiento actualizado correctamente";
+				titulo = "Actualizando el registro de " + usedMaterials;
+			}
+						
 			if(result.hasErrors()) {
-				if(usedMaterials.getIdMaterialUsed()==null) {
-					model.addAttribute("title","New register");
-				}else {
-					model.addAttribute("title","Register Update");
-				}
+				model.addAttribute("title", titulo);
 				List<ChemicalAndMaterial> chemicalAndMaterials= srvChemicalAndMaterial.findAll();
 				model.addAttribute("chemicalAndMaterials",chemicalAndMaterials);
 				List<MaintenanceGreenHouse> maintenanceGreenHouses= srvMaintenanceGreenHouse.findAll();
 				model.addAttribute(" maintenanceGreenHouses",maintenanceGreenHouses);
-				return "usedmaterial/form";
+				return "usedmaterial/form";			
 			}
-			srvUsedMaterial.save(usedMaterials);
-			flash.addAttribute("succes","Succesfull the register was saved");
-		} catch (Exception e) {
-			// TODO: handle exception
-		flash.addAttribute("error","Error the register can't be saved");
+			
+														
+			srvUsedMaterial.save(usedMaterials);	
+			flash.addFlashAttribute("success", message);
 		}
+		catch(Exception ex) {
+			flash.addFlashAttribute("error", ex.getMessage());
+		}				
 		return "redirect:/usedmaterial/list";
 	}
 	
@@ -106,19 +112,18 @@ public class UsedMaterialController {
 	public String delete(@PathVariable(value="id") Integer id, Model model, RedirectAttributes flash) {
 		try {
 			srvUsedMaterial.delete(id);
-			flash.addAttribute("succes", "The register was deleted");
+			flash.addFlashAttribute("success","El registro fue eliminado");
 		} catch (Exception e) {
-			// TODO: handle exception
-			flash.addAttribute("error","The register can't be deleted");
+			flash.addFlashAttribute("error","El registro no puede ser eliminado");
 		}
+		
 		return "redirect:/usedmaterial/list";
 	}
-	
 	
 	@GetMapping(value="/list")
 	public String list(Model model) {
 		List<UsedMaterial> usedMaterials = srvUsedMaterial.findAll();
-		model.addAttribute("title", "Chemical Used list");
+		model.addAttribute("title", "Lista de materiales usados");
 		model.addAttribute("usedMaterials", usedMaterials);
 		return "usedmaterial/list";		
 	

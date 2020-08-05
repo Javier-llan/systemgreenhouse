@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout :: frgHead"></head>
+<body>
+<div id="wrapper">
+	<header th:replace="layout :: frgHeader"></header>
+	<div id="content-wrapper" class="d-flex flex-column">
+		<!-- Begin Page Content -->
+		<div class="container">
+			<div class="container-fluid">				
+				<br />
+		<div class="card col-md-12">
+			<div class="card-body">
+				<div class="form-group row">
+					<div class="content col-sm-1">
+						<i class="far fa-plus-square fa-2x"></i>
+					</div>
+					<h3 class="card-title col-sm-10" th:text="${title}"></h3>
+				</div>
+				<hr />
+				<table class="table table-hover">
+					<thead>
+						<tr>
+								<th>Cantidad usada</th>
+								<th>Material</th>
+								<th>Mantenimiento</th>
+								<th><a class="btn btn-sm btn-success"
+									th:href="@{/usedmaterial/create}">&nbsp;Nuevo</a></th>
+						</tr>
+					</thead>
+					<tbody>						
+						<tr th:each="materialUsed : ${usedMaterials}">
+								<td th:text=${materialUsed.quantityUsed}></td>
+								<td th:text=${materialUsed.materialsGreenHouse.nameMaterial}></td>
+								<td th:text=${materialUsed.maintenancesGreenHouse.descriptionMaintenaceGreenHouse}></td>
+								<td><a class="btn btn-sm btn-warning"
+									th:href="@{/usedmaterial/update/} + ${materialUsed.idMaterialUsed}">&nbsp;Actualizar</a>
+									<a class="btn btn-sm btn-info"
+									th:href="@{/usedmaterial/retrieve/} + ${materialUsed.idMaterialUsed}">&nbsp;Consultar</a>
+								</td>
+							</tr>
+					
+					</tbody>
+				</table>
+			</div>
+		</div>
+			</div>
+			<footer th:replace="layout :: frgFooter"></footer>
+		</div>
+	</div>
+</div>
+</body>
+</html>

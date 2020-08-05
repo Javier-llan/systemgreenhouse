@@ -32,7 +32,7 @@ public class ChemicalAndMaterialController {
 	@GetMapping(value="/create")
 	public String create(Model model) {
 		ChemicalAndMaterial chemicalAndMaterials = new ChemicalAndMaterial();
-		model.addAttribute("title","New Record for Chemical and Materials");
+		model.addAttribute("title","Nuevo registro de quimicos y materiales");
 		model.addAttribute("chemicalAndMaterial",chemicalAndMaterials);
 		return "chemicalandmaterial/form";
 	}
@@ -48,7 +48,7 @@ public class ChemicalAndMaterialController {
 	public String update(@PathVariable(value="id") Integer id, Model model) {
 		ChemicalAndMaterial chemicalAndMaterials = srvChemicalAndMaterial.findById(id);
 		model.addAttribute("chemicalAndMaterial", chemicalAndMaterials);
-		model.addAttribute("title","Register update");
+		model.addAttribute("title","Registro actualizado");
 		return "chemicalandmaterial/form";
 	}
 	
@@ -56,47 +56,51 @@ public class ChemicalAndMaterialController {
 	public String delete(@PathVariable(value="id") Integer id, Model model, RedirectAttributes flash) {
 		try {
 			srvChemicalAndMaterial.delete(id);
-			flash.addAttribute("success","The record was deleted");
+			flash.addFlashAttribute("success","El registro fue eliminado");
 		} catch (Exception e) {
-			flash.addAttribute("error","The record cannot be deleted");
+			flash.addFlashAttribute("error","El registro no puede ser eliminado");
 		}
 		
 		return "redirect:/chemicalandmaterial/list";
 	}
 	
+	
 	@PostMapping(value="/save")
 	public String save( ChemicalAndMaterial chemicalAndMaterials, BindingResult result,Model model,@RequestParam("photo_qm") MultipartFile image, RedirectAttributes flash ) {
-		try {
-			if(result.hasErrors()) {
-				if(chemicalAndMaterials.getIdchemicalandmaterial()==null) {
-					model.addAttribute("title","New record");
-				}else {
-					model.addAttribute("title","Update Record");
-				}
-				return "chemicalandmaterial/form";
+try {
+			
+			String message = "Material o quimico agregado correctamente";
+			String titulo = "Nuevo registro de Material o quimico";
+			
+			if(chemicalAndMaterials.getIdchemicalAndMaterial() != null) {
+				message = "Material o quimico actualizado correctamente";
+				titulo = "Actualizando el registro de " + chemicalAndMaterials;
 			}
-			if (!image.isEmpty()) {
-
+						
+			if(result.hasErrors()) {
+				model.addAttribute("title", titulo);							
+				return "chemicalandmaterial/form";				
+			}
+			
+			if (!image.isEmpty()) {				
 				Path dir = Paths.get("src//main//resources//static//photos_qms");
 				String rootPath = dir.toFile().getAbsolutePath();
-
 				try {
-
 					byte[] bytes = image.getBytes();
 					Path rutaCompleta = Paths.get(rootPath + "//" + image.getOriginalFilename());
 					Files.write(rutaCompleta, bytes);
-					chemicalAndMaterials.setImage_chemicalmaterial(image.getOriginalFilename());
+				chemicalAndMaterials.setImage_chemicalmaterial(image.getOriginalFilename());
 
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
-			}
-			srvChemicalAndMaterial.save(chemicalAndMaterials);
-			flash.addAttribute("succes","The record was saved successfull ");
-		} catch (Exception e) {
-			// TODO: handle exception
-			flash.addAttribute("error", "The record cannot be saved");
+			}													
+			srvChemicalAndMaterial.save(chemicalAndMaterials);	
+			flash.addFlashAttribute("success", message);
 		}
+		catch(Exception ex) {
+			flash.addFlashAttribute("error", ex.getMessage());
+		}				
 		return "redirect:/chemicalandmaterial/list";
 	}
 	
@@ -104,7 +108,7 @@ public class ChemicalAndMaterialController {
 	public String list(Model model) {
 		List<ChemicalAndMaterial> chemicalAndMaterials = srvChemicalAndMaterial.findAll();
 		model.addAttribute("chemicalAndMaterials", chemicalAndMaterials);
-		model.addAttribute("title", "List of Chemical and Materials");
+		model.addAttribute("title", "Lista de quimicos y materiales");
 		return "chemicalandmaterial/list";
 	}
 }

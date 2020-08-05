@@ -1,5 +1,6 @@
 package com.system.green.house.controllers;
 
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +25,7 @@ public class GreenHouseController {
 	@GetMapping(value="/create")
 	public String create(Model model) {
 		GreenHouse greenHouses = new GreenHouse();
-		model.addAttribute("title", "Register for new Green House");
+		model.addAttribute("title", "Registro de invernadero");
 		model.addAttribute("greenHouse",greenHouses);
 		return "greenhouse/form";	
 	}
@@ -48,9 +49,9 @@ public class GreenHouseController {
 	public String delete(@PathVariable(value="id") Integer id, Model model, RedirectAttributes flash) {
 		try {
 			srvGreenHouse.delete(id);
-			flash.addAttribute("success","El registo fue eliminado");
+			flash.addFlashAttribute("success","El registro fue eliminado");
 		} catch (Exception e) {
-			flash.addAttribute("error","El registro no pudo ser eliminado");
+			flash.addFlashAttribute("error","El registro no puede ser eliminado");
 		}
 		
 		return "redirect:/greenhouse/list";
@@ -58,29 +59,37 @@ public class GreenHouseController {
 	
 	@PostMapping(value="/save")
 	public String save( GreenHouse greenHouses, BindingResult result,Model model, RedirectAttributes flash ) {
-		try {
-			if(result.hasErrors()) {
-				if(greenHouses.getIdgreenHouse()==null) {
-					model.addAttribute("title","Nuevo registro");
-				}else {
-					model.addAttribute("title","Actulización del registro");
-				}
-				return "greenhouse/form";
+try {
+			
+			String message = "Invernadero agregado correctamente";
+			String titulo = "Nuevo registro de Invernadero";
+			
+			if(greenHouses.getIdgreenHouse() != null) {
+				message = "Invernadero actualizado correctamente";
+				titulo = "Actualizando el registro de " + greenHouses;
 			}
-			srvGreenHouse.save(greenHouses);
-			flash.addAttribute("succes","El registro fue guardado con éxito ");
-		} catch (Exception e) {
-			// TODO: handle exception
-			flash.addAttribute("error", "El registro no pudo ser guardado");
+						
+			if(result.hasErrors()) {
+				model.addAttribute("title", titulo);							
+				return "greenhouse/form";				
+			}
+			
+														
+			srvGreenHouse.save(greenHouses);	
+			flash.addFlashAttribute("success", message);
 		}
+		catch(Exception ex) {
+			flash.addFlashAttribute("error", ex.getMessage());
+		}				
 		return "redirect:/greenhouse/list";
+	
 	}
 	
 	@GetMapping(value="/list")
 	public String list(Model model) {
 		List<GreenHouse> greenHouses = srvGreenHouse.findAll();
 		model.addAttribute("greenHouses", greenHouses);
-		model.addAttribute("title", "List of Green Houses");
+		model.addAttribute("title", "Listado de Invernaderos");
 		return "greenhouse/list";
 	}
 }

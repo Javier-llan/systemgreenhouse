@@ -27,7 +27,7 @@
 													
 													<li class="nav-item"><a class="nav-link" id="tab--2"
 													data-toggle="tab" href="#tab2" role="tab"
-													aria-controls="tab2" aria-selected="false">Mantenimientos</a>
+													aria-controls="tab2" aria-selected="false">Manteriales Usados</a>
 												</li>
 											</ul>
 											<hr />
@@ -40,69 +40,37 @@
 									<div class="academy-tab-text">
 										<div class="contact-form-area wow fadeInUp"
 											data-wow-delay="500ms">
-											<form th:object="${greenHouse}" method="post">
+											<form th:object="${usedMaterial}" method="post">
 												<div class="row d-flex align-items-center">
 													<div class="col-2">
-														<i><strong>Invernadero: </strong></i>
+														<i><strong>Cantidad usada: </strong></i>
 													</div>
 													<div class="col-5">
 														<input type="text" class="form-control"
-															th:field="*{nameGreenHouse}" readonly />
+															th:field="*{quantityUsed}" readonly />
 													</div>
 												</div>
 												
-												<div class="row d-flex align-items-center">
-													<div class="col-2">
-														<i><strong>Dimension: </strong></i>
-													</div>
-													<div class="col-5">
-														<input type="text" class="form-control"
-															th:field="*{dimensionGreenHouse}" readonly />
-													</div>
-
-												</div>
 												
 												<div class="row d-flex align-items-center">
 													<div class="col-2">
-														<i><strong>Condicion: </strong></i>
+														<i><strong>Manteriales: </strong></i>
 													</div>
 													<div class="col-5">
 														<input type="text" class="form-control"
-															th:field="*{conditionGreenHouse}" readonly />
+															th:field="*{materialsGreenHouse.nameMaterial}" readonly/>
 													</div>
-
-												</div>
-												
-												<div class="row d-flex align-items-center">
-													<div class="col-2">
-													 <i><strong>Grosor Paredes: </strong></i>
-													</div>
-													<div class="col-5">
-														<input type="text" class="form-control"
-															th:field="*{caliberCeilingLateral}" readonly />
-													</div>
-
-												</div>
-												
-												<div class="row d-flex align-items-center">
-													<div class="col-2">
-														<i><strong>Grosor Canaleta: </strong></i>
-													</div>
-													<div class="col-5">
-														<input type="text" class="form-control"
-															th:field="*{caliberCanal}" readonly />
-													</div>
-
+													
 												</div>
 												
 
 												<div class="row d-flex align-items-center">
 													<div class="col-2">
-														<i><strong>Comentario: </strong></i>
+														<i><strong>Mantenimiento: </strong></i>
 													</div>
 													<div class="col-5">
 														<input type="text" class="form-control"
-															th:field="*{commentary}" readonly/>
+															th:field="*{maintenancesGreenHouse.descriptionMaintenaceGreenHouse}" readonly/>
 													</div>
 													
 												</div>
@@ -122,12 +90,12 @@
 					<div class="col-sm-4">
 						<button class="btn btn-danger" data-toggle="modal" data-target="#deleteModal">
 						<i class="fas fa-info-circle"></i>&nbsp;Eliminar</button>
-						<a class="btn btn-primary" th:href="@{/greenhouse/list}"><i
+						<a class="btn btn-primary" th:href="@{/usedmaterial/list}"><i
 							class="fas fa-arrow-left"></i>&nbsp;Volver</a>
 					</div>
 				</div>
-				<input type="hidden" id="idgreenhouse"
-					th:value="${greenHouse.idgreenHouse}" />
+				<input type="hidden" id="idMaterialUsed"
+					th:value="${usedMaterial.idMaterialUsed}" />
 				<hr />
 				
 			</div>
@@ -136,7 +104,7 @@
 			<div class="modal-dialog" role="document">
 				<div class="modal-content">
 					<div class="modal-header">
-						<h5 class="modal-title">¿Desea eliminar el Invernadero?</h5>
+						<h5 class="modal-title">¿Desea eliminar el registro?</h5>
 						<button type="button" class="close" data-dismiss="modal"
 							aria-label="Close">
 							<span aria-hidden="true">&times;</span>
@@ -145,7 +113,7 @@
 					
 					<div class="modal-footer">						
 						<button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
-						<a th:href="@{/greenhouse/delete/} + ${greenHouse.idgreenHouse}" class="btn btn-success">Confirmar</a>
+						<a th:href="@{/usedmaterial/delete/} + ${usedMaterial.idMaterialUsed}" class="btn btn-success">Confirmar</a>
 					</div>
 				</div>
 			</div>

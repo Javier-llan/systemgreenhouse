@@ -54,17 +54,16 @@ public class UsedMaterial implements Serializable{
 	
 	@JoinColumn(name="fk_chemical_material", referencedColumnName="pk_chemical_material")
 	@ManyToOne
-	private ChemicalAndMaterial material;
-
-	public ChemicalAndMaterial getMaterials() {
-		return material;
+	private ChemicalAndMaterial materialsGreenHouse;
+	
+	public ChemicalAndMaterial getMaterialsGreenHouse() {
+		return materialsGreenHouse;
 	}
 
-	public void setMaterials(ChemicalAndMaterial materials) {
-		this.material = materials;
+	public void setMaterialsGreenHouse(ChemicalAndMaterial materialsGreenHouse) {
+		this.materialsGreenHouse = materialsGreenHouse;
 	}
-	
-	
+
 	@JoinColumn(name="fk_maintenance_green_house",referencedColumnName="pk_maintenance_green_house")
 	@ManyToOne
 	private MaintenanceGreenHouse maintenancesGreenHouse;

@@ -17,7 +17,7 @@
 					</div>
 					<h3 class="card-title col-sm-10" th:text="${title}"></h3>					
 				</div>
-			Formulario	
+			
 				<form th:action="@{/chemicalandmaterial/save}" th:object="${chemicalAndMaterial}" enctype="multipart/form-data" method="post">
 				
 			
@@ -215,7 +215,7 @@
 							</button>
 						</div>
 					</div>
-					<input type="hidden" th:field="*{idchemicalandmaterial}" />
+					<input type="hidden" th:field="*{idchemicalAndMaterial}" />
 							
 				
 				</form>

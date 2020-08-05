@@ -39,7 +39,7 @@ public class ChemicalUsedController {
 		model.addAttribute("title","Register for Chemical useds");
 		model.addAttribute("chemicalUsed",chemicalUseds);
 		List<ChemicalAndMaterial> chemicalMaterials = srvChemicalAndMaterial.findAll();
-		model.addAttribute("chemicalAndMaterials",chemicalMaterials);
+		model.addAttribute("chemicalAndMaterial",chemicalMaterials);
 		List<TreatmentSowing> treatmentSowings = srvTreatmentSowing.findAll();
 		model.addAttribute("treatmentSowings",treatmentSowings);
 		return "chemicalused/form";
@@ -58,7 +58,7 @@ public class ChemicalUsedController {
 		model.addAttribute("title","Register for new Chemical used");
 		model.addAttribute("chemicalUsed",chemicalUseds);
 		List<ChemicalAndMaterial> chemicalAndMaterials = srvChemicalAndMaterial.findAll();
-		model.addAttribute("chemicalAndMaterials",chemicalAndMaterials);
+		model.addAttribute("chemicalAndMaterial",chemicalAndMaterials);
 		List<TreatmentSowing> treatmentSowings = srvTreatmentSowing.findAll();
 		model.addAttribute("treatmentSowings",treatmentSowings);
 		return "chemicalused/form";
@@ -70,7 +70,7 @@ public class ChemicalUsedController {
 		model.addAttribute("title","Register update");
 		model.addAttribute("chemicalUsed",chemicalUseds);
 		List<ChemicalAndMaterial> chemicalAndMaterials=srvChemicalAndMaterial.findAll();
-		model.addAttribute("chemicalAndMaterials",chemicalAndMaterials);
+		model.addAttribute("chemicalAndMaterial",chemicalAndMaterials);
 		List<TreatmentSowing> treatmentSowings=srvTreatmentSowing.findAll();
 		model.addAttribute("treatmentSowing",treatmentSowings);
 		return "chemicalused/form";
@@ -87,7 +87,7 @@ public class ChemicalUsedController {
 					model.addAttribute("title","Register Update");
 				}
 				List<ChemicalAndMaterial> chemicalAndMaterials= srvChemicalAndMaterial.findAll();
-				model.addAttribute("chemicalAndMaterials",chemicalAndMaterials);
+				model.addAttribute("chemicalAndMaterial",chemicalAndMaterials);
 				List<TreatmentSowing> treatmentSowings= srvTreatmentSowing.findAll();
 				model.addAttribute("treatmentSowing",treatmentSowings);
 				return "chemicalused/form";

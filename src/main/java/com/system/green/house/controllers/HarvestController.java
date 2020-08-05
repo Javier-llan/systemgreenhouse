@@ -81,10 +81,10 @@ public class HarvestController {
 				return "harvest/form";
 			}
 			srvHarvest.save(harvests);
-			flash.addAttribute("succes","El registro fue guardado");
+			flash.addFlashAttribute("succes","El registro fue guardado");
 		} catch (Exception e) {
 			// TODO: handle exception
-		flash.addAttribute("error","El registro no pudo ser guardado");
+		flash.addFlashAttribute("error","El registro no pudo ser guardado");
 		}
 		return "redirect:/harvest/list";
 	}
@@ -93,10 +93,10 @@ public class HarvestController {
 	public String delete(@PathVariable(value="id") Integer id, Model model, RedirectAttributes flash) {
 		try {
 			srvHarvest.delete(id);
-			flash.addAttribute("succes", "El registro fue eliminado");
+			flash.addFlashAttribute("succes", "El registro fue eliminado");
 		} catch (Exception e) {
 			// TODO: handle exception
-			flash.addAttribute("error","El registro no pudo ser eliminado");
+			flash.addFlashAttribute("error","El registro no pudo ser eliminado");
 		}
 		return "redirect:/harvest/list";
 	}

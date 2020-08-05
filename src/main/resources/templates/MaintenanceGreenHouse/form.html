@@ -16,24 +16,23 @@
 						<i class="far fa-plus-square fa-2x"></i>
 					</div>
 					<h3 class="card-title col-sm-10" th:text="${title}"></h3>					
-				</div>
-			
-				<form th:action="@{/greenhouse/save}" th:object="${greenHouse}" method="post">
+				</div>	
+				<form th:action="@{/maintenancegreenhouse/save}" th:object="${maintenanceGreenHouse}" method="post">
 				
 			
 				 			
 				  <div class="form-group row">
 						<div class="content col-sm-3">
 							<i class="fas fa-info-circle"></i>
-							<label class="h5 col-form-label">&nbsp;Nombre del Invernadero:</label>						
+							<label class="h5 col-form-label">&nbsp;Fecha del Mantenimiento:</label>						
 						</div>
 						<div class="content col-sm-6">							
-							<input class="form-control" type="text" 
-								th:field="*{nameGreenHouse}"
+							<input class="form-control" type="date" 
+								th:field="*{dateMaintenanceGreenHouse}"
 								th:errorclass="'form-control is-invalid'" />
 							<small class="invalid-feedback"
-								th:if="${#fields.hasErrors('nameGreenHouse')}"
-								th:errors="*{nameGreenHouse}"></small>										
+								th:if="${#fields.hasErrors('dateMaintenanceGreenHouse')}"
+								th:errors="*{dateMaintenanceGreenHouse}"></small>										
 
 						</div>
 					</div> 
@@ -44,18 +43,18 @@
 					  <div class="form-group row">
 						<div class="content col-sm-3">
 							<i class="fas fa-info-circle"></i>
-							<label class="h5 col-form-label">&nbsp;Dimension Invernadero:</label>						
+							<label class="h5 col-form-label">&nbsp;Descripcion:</label>						
 						</div>
 						<div class="content col-sm-6">							
-							<input class="form-control" type="number" 
-								th:field="*{dimensionGreenHouse}"
+							<input class="form-control" type="text" 
+								th:field="*{descriptionMaintenaceGreenHouse}"
 								th:errorclass="'form-control is-invalid'" />
 							<small class="invalid-feedback"
-								th:if="${#fields.hasErrors('dimensionGreenHouse')}"
-								th:errors="*{dimensionGreenHouse}"></small>										
+								th:if="${#fields.hasErrors('descriptionMaintenaceGreenHouse')}"
+								th:errors="*{descriptionMaintenaceGreenHouse}"></small>										
 
 						</div>
-					</div> 
+					</div>
 					
 					<hr />
 					
@@ -65,53 +64,42 @@
 							<label class="h5 col-form-label">&nbsp;Condicion:</label>						
 						</div>
 						<div class="content col-sm-6">							
-							<input class="form-control" type="text" 
-								th:field="*{conditionGreenHouse}"
+							<input class="form-control" type="number" 
+								th:field="*{conditionMaintenanceGreenHouse}"
 								th:errorclass="'form-control is-invalid'" />
 							<small class="invalid-feedback"
-								th:if="${#fields.hasErrors('conditionGreenHouse')}"
-								th:errors="*{conditionGreenHouse}"></small>										
+								th:if="${#fields.hasErrors('conditionMaintenanceGreenHouse')}"
+								th:errors="*{conditionMaintenanceGreenHouse}"></small>										
 
 						</div>
 					</div> 
+					
 					
 						<hr />
-					
-					  <div class="form-group row">
+						
+					<div class="form-group row">
 						<div class="content col-sm-3">
 							<i class="fas fa-info-circle"></i>
-							<label class="h5 col-form-label">&nbsp;Grosor Paredes:</label>						
+							<label class="h5 col-form-label">&nbsp;Invernadero:</label>						
 						</div>
 						<div class="content col-sm-6">							
-							<input class="form-control" type="number" 
-								th:field="*{caliberCeilingLateral}"
-								th:errorclass="'form-control is-invalid'" />
-							<small class="invalid-feedback"
-								th:if="${#fields.hasErrors('caliberCeilingLateral')}"
-								th:errors="*{caliberCeilingLateral}"></small>										
-
+							<select class="form-control" th:field="*{greenHouse.idgreenHouse}">
+								<option value=0>--Seleccione--</option>
+								<option th:each="green : ${greenHouses}"								 
+								th:value="${green.idgreenHouse}" 
+								th:text="${green.nameGreenHouse}"
+								th:selected="${maintenanceGreenHouse.greenHouse.idgreenHouse == green.idgreenHouse}"></option>
+							</select>
+								
+								<small class="invalid-feedback"
+								th:if="${#fields.hasErrors('greenHouse.idgreenHouse')}"
+								th:errors="*{greenHouse.idgreenHouse}"
+								></small>									
 						</div>
-					</div> 
+					</div>
 					
 					<hr />
 					
-					  <div class="form-group row">
-						<div class="content col-sm-3">
-							<i class="fas fa-info-circle"></i>
-							<label class="h5 col-form-label">&nbsp;Grosor Canaletas:</label>						
-						</div>
-						<div class="content col-sm-6">							
-							<input class="form-control" type="number" 
-								th:field="*{caliberCanal}"
-								th:errorclass="'form-control is-invalid'" />
-							<small class="invalid-feedback"
-								th:if="${#fields.hasErrors('caliberCanal')}"
-								th:errors="*{caliberCanal}"></small>										
-
-						</div>
-					</div> 
-					
-					<hr />
 					
 					  <div class="form-group row">
 						<div class="content col-sm-3">
@@ -120,11 +108,11 @@
 						</div>
 						<div class="content col-sm-6">							
 							<input class="form-control" type="text" 
-								th:field="*{commentary}"
+								th:field="*{commentarMaintenanceGreenHouse}"
 								th:errorclass="'form-control is-invalid'" />
 							<small class="invalid-feedback"
-								th:if="${#fields.hasErrors('commentary')}"
-								th:errors="*{commentary}"></small>										
+								th:if="${#fields.hasErrors('commentarMaintenanceGreenHouse')}"
+								th:errors="*{commentarMaintenanceGreenHouse}"></small>										
 
 						</div>
 					</div> 
@@ -135,14 +123,14 @@
 					<div class="form-group row">
 						<div class="col-sm-4">
 							<a class="btn btn-danger" 
-								th:href="@{/greenhouse/list}">
+								th:href="@{/maintenancegreenhouse/list}">
 							<i class="fas fa-minus-circle"></i>&nbsp;Cancelar</a>
 							<button class="btn btn-success" type="submit">
 								<i class="fas fa-plus-circle"></i>&nbsp;Guardar
 							</button>
 						</div>
 					</div>
-					<input type="hidden" th:field="*{idgreenHouse}" />
+					<input type="hidden" th:field="*{idMaintenaceGreenHouse}" />
 							
 				
 				</form>

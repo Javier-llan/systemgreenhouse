@@ -16,12 +16,22 @@
 					
 							
 					<div class="card-columns">
+									<div class="card bg-light" >
+										<i class="far fa-image fa-2x"></i>
+										<div class="card-body">
+											
+												<img class="card-img" th:src="@{/photos_qms/} + ${chemicalAndMaterial.image_chemicalmaterial}" width="80"
+													height="80" />
+											
+										</div>
+									</div>
 									<div class="card bg-light">
 										<i class="fas fa-atom fa-2x"></i>	
 										<div class="card-body text-center">
 											<p th:text=${chemicalAndMaterial.nameMaterial}></p>
 										</div>
 									</div>
+									
 									<div class="card bg-light">
 										<i class="fas fa-flask fa-2x"></i>
 										<div class="card-body text-center">
@@ -70,15 +80,7 @@
 											<p th:text=${chemicalAndMaterial.commentary}></p>
 										</div>
 									</div>
-									<div class="card bg-light" >
-										<i class="far fa-image fa-2x"></i>
-										<div class="card-body">
-											
-												<img class="card-img" th:src="@{/photos_qms/} + ${chemicalAndMaterial.image_chemicalmaterial}" width="80"
-													height="80" />
-											
-										</div>
-									</div>
+									
 								</div>
 					
 					
@@ -89,8 +91,8 @@
 							class="fas fa-arrow-left"></i>&nbsp;Volver</a>
 					</div>
 				</div>
-				<input type="hidden" id="idchemicalandmaterial"
-					th:value="${chemicalAndMaterial.idchemicalandmaterial}" />
+				<input type="hidden" id="idchemicalAndMaterial"
+					th:value="${chemicalAndMaterial.idchemicalAndMaterial}" />
 				<hr />
 				
 			</div>
@@ -118,7 +120,7 @@
 					</div>
 					<div class="modal-footer">						
 						<button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
-						<a th:href="@{/chemicalandamaterial/delete/} + ${chemicalAndMaterial.idchemicalandmaterial}" class="btn btn-success">Confirmar</a>
+						<a th:href="@{/chemicalandmaterial/delete/} + ${chemicalAndMaterial.idchemicalAndMaterial}" class="btn btn-success">Confirmar</a>
 					</div>
 				</div>
 			</div>
