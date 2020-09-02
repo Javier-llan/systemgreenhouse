@@ -72,7 +72,7 @@ public class UsedMaterialController {
 		List<ChemicalAndMaterial> chemicalAndMaterials=srvChemicalAndMaterial.findAll();
 		model.addAttribute("chemicalAndMaterials",chemicalAndMaterials);
 		List<MaintenanceGreenHouse> maintenanceGreenHouses=srvMaintenanceGreenHouse.findAll();
-		model.addAttribute(" maintenanceGreenHouses",maintenanceGreenHouses);
+		model.addAttribute("maintenanceGreenHouses",maintenanceGreenHouses);
 		return "usedmaterial/form";
 	}
 	

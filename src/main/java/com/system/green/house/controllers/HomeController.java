@@ -15,9 +15,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 public class HomeController {
 	@GetMapping(value= {"/","/home.html"})
 	public String home(Model model) {
-		model.addAttribute("framework","Spring Boot");
-		model.addAttribute("main","Taller en clases");
-		model.addAttribute("description","Front - End");
+		model.addAttribute("title","Proyecto Certificación II");
+		model.addAttribute("description","Gestione de manera fácil e inteligente su invernadero");
 		return "home";
 	}
 	
