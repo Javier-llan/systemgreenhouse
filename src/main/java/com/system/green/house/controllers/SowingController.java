@@ -10,7 +10,9 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.system.green.house.models.entities.GreenHouse;
@@ -19,6 +21,9 @@ import com.system.green.house.models.entities.Sowing;
 import com.system.green.house.models.services.IGreenHouseService;
 import com.system.green.house.models.services.IPlantService;
 import com.system.green.house.models.services.ISowingService;
+
+
+
 
 @RequestMapping(value="/sowing")
 @Controller
@@ -32,6 +37,7 @@ public class SowingController {
 	@Autowired
 	private IGreenHouseService srvGreenHouse;
 	
+	
 	@GetMapping(value="/create")
 	public String create(Model model) {
 		Sowing sowings = new Sowing();
@@ -44,13 +50,27 @@ public class SowingController {
 		return "sowing/form";
 	}
 	
+	
+	@GetMapping(value="/create/{id}")
+	public String create(@PathVariable(value="id") Integer id, Model model) {
+		Sowing sowings = new Sowing();
+		sowings.setPlantid(id);
+		model.addAttribute("title","Register for new Sowing");
+		model.addAttribute("sowing", sowings);		
+		List<GreenHouse> greenHouses = srvGreenHouse.findAll();
+		model.addAttribute("greenHouses",greenHouses);
+		return "sowing/form";
+	}
+	
 	@GetMapping(value="/retrieve/{id}")
 	public String retrieve(@PathVariable(value="id") Integer id, Model model) {
 		Sowing sowings= srvSowing.findById(id);
 		model.addAttribute("sowing", sowings);
-		return "sowing/form";
+		return "sowing/card";
 	}
 	
+	
+    /*
 	@GetMapping(value="/create/{i}")
 	public String create(@PathVariable(value="id")Integer id, Model model) {
 		Sowing sowings = srvSowing.findById(id);
@@ -63,6 +83,8 @@ public class SowingController {
 		return "sowing/form";
 	}
 	
+	*/
+	
 	@GetMapping(value="/update/{id}")
 	public String update(@PathVariable(value="id") Integer id, Model model) {
 		Sowing sowing = srvSowing.findById(id);
@@ -72,32 +94,29 @@ public class SowingController {
 		model.addAttribute("plants",plants);
 		List<GreenHouse> greenHouses=srvGreenHouse.findAll();
 		model.addAttribute("greenHouses",greenHouses);
-		return "greenhouse/form";
+		return "sowing/form";
 	}
 	
 
 	@PostMapping(value="/save")
-	public String save(@Validated Sowing sowings, BindingResult result, Model model, RedirectAttributes flash) {
+	public String save(@RequestBody @Validated Sowing sowings, BindingResult result, Model model, RedirectAttributes flash) {
 		try {
-			if(result.hasErrors()) {
-				if(sowings.getIdsowing()==null) {
-					model.addAttribute("title","New register");
-				}else {
-					model.addAttribute("title","Register Update");
-				}
-				List<Plant> plants= srvPlant.findAll();
-				model.addAttribute("plants",plants);
+			
+				
+				Plant plants = this.srvPlant.findById(sowings.getPlantid());
+				sowings.setPlants(plants);
 				List<GreenHouse> greenHouses= srvGreenHouse.findAll();
 				model.addAttribute("greenHouses",greenHouses);
-				return "greenhouse/form";
-			}
-			srvSowing.save(sowings);
-			flash.addAttribute("succes","Succesfull the register was saved");
+				this.srvSowing.save(sowings);
+				flash.addAttribute("succes","Succesfull the register was saved");
+				return "sowing/list";
+				
+			
 		} catch (Exception e) {
 			// TODO: handle exception
 		flash.addAttribute("error","Error the register can't be saved");
 		}
-		return "redirect:/sowing/list";
+		return "redirect:/sowing/form";
 	}
 	
 	@GetMapping(value="/delete/{id}")
@@ -116,10 +135,18 @@ public class SowingController {
 	@GetMapping(value="/list")
 	public String list(Model model) {
 		List<Sowing> sowings = srvSowing.findAll();
-		model.addAttribute("title", "Sowing list");
+		model.addAttribute("title", "Lista de siembras");
 		model.addAttribute("sowings", sowings);
 		return "sowing/list";		
 	
 	}
+	
+	@GetMapping(value="/list/{id}")
+	public String list(@PathVariable(value="id") Integer id, Model model) {
+		List<Sowing> sowings = this.srvSowing.findByPlant(id);
+		model.addAttribute("sowings", sowings);
+		return "sowing/list";
+	}
+	
 	
 }

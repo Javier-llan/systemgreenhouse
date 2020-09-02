@@ -13,6 +13,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name="plants")
 public class Plant implements Serializable{
@@ -119,6 +121,7 @@ public class Plant implements Serializable{
 		this.image_plant = image_plant;
 	}
 
+	@JsonIgnore
 	@OneToMany(mappedBy="plants",fetch=FetchType.LAZY)
 	private List<Sowing> sowing;
 
@@ -128,6 +131,11 @@ public class Plant implements Serializable{
 
 	public void setSowing(List<Sowing> sowing) {
 		this.sowing = sowing;
+	}
+
+	@Override
+	public String toString() {
+		return "Plant [namePlant=" + namePlant + ", descriptionPlant=" + descriptionPlant + "]";
 	}
 	
 	

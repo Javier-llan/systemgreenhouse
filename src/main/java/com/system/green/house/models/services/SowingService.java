@@ -9,6 +9,8 @@ import org.springframework.transaction.annotation.Transactional;
 import com.system.green.house.models.dao.ISowing;
 import com.system.green.house.models.entities.Sowing;
 
+
+
 @Service
 public class SowingService implements ISowingService{
 	@Autowired 
@@ -36,6 +38,23 @@ public class SowingService implements ISowingService{
 	@Transactional
 	public List<Sowing> findAll() {
 		return (List<Sowing>) dao.findAll();
+	}
+	
+	
+
+	
+	
+	@Override
+	@Transactional
+	public List<Sowing> findByPlant(Integer id) {
+		try {
+			List<Sowing> resultado = dao.findByPlant(id);
+			return resultado;
+		}
+		catch(Exception ex) {
+			System.out.println("Error =>" + ex.getMessage());
+			return null;
+		}
 	}
 
 }

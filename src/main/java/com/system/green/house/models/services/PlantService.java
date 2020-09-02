@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.system.green.house.models.dao.IPlant;
 import com.system.green.house.models.entities.Plant;
 
+
 @Service
 public class PlantService implements IPlantService {
 
@@ -38,5 +39,7 @@ public class PlantService implements IPlantService {
 	public List<Plant> findAll() {
 		return (List<Plant>) dao.findAll();
 	}
+	
+	
 
 }

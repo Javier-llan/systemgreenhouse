@@ -15,6 +15,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.persistence.Transient;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Table(name="sowings")
@@ -28,6 +33,8 @@ public class Sowing implements Serializable{
 	@Column(name="pk_sowing")
 	private Integer idsowing;
 	
+	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(pattern = "yyyy-MM-dd")	
 	@Column(name="date_sowing")
 	private Calendar dateSowing;
 	
@@ -43,6 +50,19 @@ public class Sowing implements Serializable{
 	@Column(name="commentary_sowing")
 	private String commentary_sowing;
 	
+	
+	/**** TRANSIENT ***/
+	@Transient
+	private int plantid;
+	
+	public int getPlantid() {
+		return plantid;
+	}
+
+	public void setPlantid(int plantid) {
+		this.plantid = plantid;
+	}
+
 	public Sowing() {
 		super();
 	}
@@ -148,5 +168,5 @@ public class Sowing implements Serializable{
 	}
 	
 	
-		
+	
 }
