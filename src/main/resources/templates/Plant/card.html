@@ -8,14 +8,10 @@
 
 	<header th:replace="layout :: frgHeader"></header>
 
-	<div class="breadcumb-area bg-img"
-		th:style="'background-image:url(' + @{/img/bg-img/breadcumb.jpg} + ');'">
-		<div class="bradcumbContent">
-			<h2>Planta</h2>
-		</div>
-	</div>
+	
 
 	<div class="top-popular-courses-area mt-100 section-padding-100-70">
+	
 		<section class="contact-area mt-100">
 			<div class="container">
 				<div class="row">
@@ -25,7 +21,7 @@
 								<div class="col-12">
 									<div class="row">
 										<div class=col-10>
-											<span>Contenido</span>
+											<h2>Planta</h2>
 											<h4 th:text="${title}"></h4>
 										</div>
 
@@ -59,30 +55,36 @@
 
 																	<div class="card-columns">
 																		<div class="card bg-light">
+																		<h5>Nombre:</h5>
 																			<i class="fas fa-seedling fa-2x"></i>
+																			
 																			<div class="card-body text-center">
 																				<p class="card-text" th:text=${plant.namePlant}></p>
 																			</div>
 																		</div>
 																		<div class="card bg-light">
+																		<h5>Tipo:</h5>
 																			<i class="fas fa-dna fa-2x"></i>
 																			<div class="card-body text-center">
 																				<p class="card-text" th:text=${plant.typePlant}></p>
 																			</div>
 																		</div>
 																		<div class="card bg-light">
+																		<h5>Variedad:</h5>
 																			<i class="fas fa-mortar-pestle fa-2x"></i>
 																			<div class="card-body text-center">
 																				<p class="card-text" th:text=${plant.varietyPlant}></p>
 																			</div>
 																		</div>
 																		<div class="card bg-light">
+																		<h5>Condici&oacute;n:</h5>
 																			<i class="fas fa-clipboard-check fa-2x"></i>
 																			<div class="card-body text-center">
 																				<p class="card-text" th:text=${plant.conditionPlant}></p>
 																			</div>
 																		</div>
 																		<div class="card bg-light">
+																		<h5>Descripci&oacute;n:</h5>
 																			<i class="fas fa-prescription-bottle fa-2x"></i>
 																			<div class="card-body text-center">
 																				<p class="card-text"
@@ -90,12 +92,14 @@
 																			</div>
 																		</div>
 																		<div class="card bg-light">
+																		<h5>Comentario:</h5>
 																			<i class="fas fa-info-circle fa-2x"></i>
 																			<div class="card-body text-center">
 																				<p class="card-text" th:text=${plant.commentary}></p>
 																			</div>
 																		</div>
 																		<div class="card bg-light">
+																		<h5>Imagen:</h5>
 																			<i class="far fa-image fa-2x"></i>
 																			<div class="card-body">
 

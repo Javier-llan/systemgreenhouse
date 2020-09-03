@@ -9,6 +9,10 @@
 	href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
 	integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU"
 	crossorigin="anonymous">
+
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3"></script>
 </head>
 <body>
 	<header th:fragment="frgHeader" class="container">
@@ -25,9 +29,7 @@
 					<li class="nav-item">
 					<a class="nav-link"th:href="@{/plant/list}">Planta</a>
 					</li>
-					<li class="nav-item">
-					<a class="nav-link"th:href="@{/sowing/list}">Siembra</a>
-					</li>
+					
 					<li class="nav-item">
 					<a class="nav-link"th:href="@{/greenhouse/list}">Invernadero</a>
 					</li>
@@ -135,19 +137,48 @@
         </footer>
 
     </body>
+    <div class="row">
+			<div class="col-12">
+				<div id="success-alert" th:if="${success != null}">
+					<script th:inline="javascript">
+						/*<![CDATA[*/
+						var message = /*[[${success}]]*/
+						Swal.fire({
+							title : '¡Correcto!',
+							text : message,
+							icon : 'success',
+							button : 'Aceptar'
+						})
+						/*]]>*/
+					</script>
+				</div>
+				<div id="error-alert" th:if="${error != null}">
+					<script th:inline="javascript">
+						/*<![CDATA[*/
+						var message = /*[[${error}]]*/
+						Swal.fire({
+							title : '¡Error!',
+							text : message,
+							icon : 'error',
+							button : 'Aceptar'
+						})
+						/*]]>*/
+					</script>
+				</div>
+
+			</div>
+		</div>
+    
     
     <div th:fragment="frgScripts">
-		<!-- jQuery-2.2.4 js -->
 		<script th:src="@{/js/jquery/jquery-2.2.4.min.js}"></script>
-		<!-- Popper js -->
-		<script th:src="@{/js/bootstrap/popper.min.js}"></script>
-		<!-- Bootstrap js -->
-		<script th:src="@{/js/bootstrap/bootstrap.min.js}"></script>
+		
+		
 		<!-- All Plugins js -->
 		<script th:src="@{/js/plugins/plugins.js}"></script>
 		<!-- Active js -->
 		<script th:src="@{/js/active.js}"></script>
-		<script th:src="@{/vendor/all.min.js}"></script>
+		
 		<script th:src="@{/js/layout-util.js}"></script>
 	</div>
     

@@ -59,7 +59,8 @@ $(document).ready(function(){
 	});
 	
 	$("#btnSubmit").click(function(){
-		save();		
+		save();	
+		location.reload();
 	});
 	
 	$("#tab--2").click(function(){

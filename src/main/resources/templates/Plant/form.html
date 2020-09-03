@@ -42,7 +42,7 @@ input[type = "radio"]:checked ~ label{color:orange;}
 			<div class="row d-flex align-items-center">		
 				  <div class="form-group row">
 						<div class="content col-1">
-							<i class="fas fa-seedling "></i>					
+							<i class="fas fa-seedling " title="Nombre común de la planta"></i>					
 						</div>
 						<div class="content col-10">						
 							<input class="form-control" type="text" 
@@ -59,13 +59,18 @@ input[type = "radio"]:checked ~ label{color:orange;}
 					<br/>
 					  <div class="form-group row">
 						<div class="content col-1">
-							<i class="fas fa-dna"></i>											
+							<i class="fas fa-dna" title="Tipo de planta según su tamaño"></i>											
 						</div>
 						<div class="content col-10">							
-							<input class="form-control" type="text" 
-								th:field="*{typePlant}"
-								th:errorclass="'form-control is-invalid'" 
-								placeholder="Tipo de planta"/>
+							<h5>Tipo de planta</h5>
+								<select class="form-control" th:field="*{typePlant}"
+								      th:errorclass="'form-control is-invalid'">
+									  <option value="&Aacute;rboles">&Aacute;rboles</option>
+									  <option value="Arbustos">Arbustos</option>
+									  <option value="Matas">Matas</option>
+									  <option value="Hierbas">Arbustos</option>
+									  			
+      						 </select>
 							<small class="invalid-feedback"
 								th:if="${#fields.hasErrors('typePlant')}"
 								th:errors="*{typePlant}"></small>										
@@ -76,13 +81,16 @@ input[type = "radio"]:checked ~ label{color:orange;}
 		   		     <br/>
 					  <div class="form-group row">
 						<div class="content col-1">
-							<i class="fas fa-mortar-pestle"></i>							
+							<i class="fas fa-mortar-pestle" title="Variedad de planta según su duración"></i>							
 						</div>
 						<div class="content col-10">							
-							<input class="form-control" type="text" 
-								th:field="*{varietyPlant}"
-								th:errorclass="'form-control is-invalid'"
-								placeholder="Variedad de la planta"/>
+								<h5>Variedad de planta</h5>
+								<select class="form-control" th:field="*{varietyPlant}"
+								      th:errorclass="'form-control is-invalid'">
+									  <option value="Anuales">Anuales</option>
+									  <option value="Bienales">Bienales</option>
+									  <option value="Perennes">Perennes</option>			
+      						 </select>
 							<small class="invalid-feedback"
 								th:if="${#fields.hasErrors('varietyPlant')}"
 								th:errors="*{varietyPlant}"></small>										
@@ -95,10 +103,10 @@ input[type = "radio"]:checked ~ label{color:orange;}
 				 
 				 <div class="form-group row">
 						<div class="content col-1">
-							<i class="fas fa-clipboard-check"></i>											
+							<i class="fas fa-clipboard-check" title="Estado fisico o condición de la planta"></i>											
 						</div>
 						<div class="content col-10">							
-							<h4>Condici&oacute;n:</h4>
+							<h5>Condici&oacute;n de la planta</h5>
 						<p class="clasificacion"> 
                         <input th:field="*{conditionPlant}"
 								th:errorclass="'form-control is-invalid'"  id="radio1" type="radio" name="estrellas" value="5" ><!--
@@ -167,6 +175,7 @@ input[type = "radio"]:checked ~ label{color:orange;}
 						<div class="content col-1">
 							<i class="far fa-image fa-2x"></i>					
 						</div>
+						<h5>Imagen de la planta</h5>
 						<div class="content col-10">
 							<input type="file" name="photo_plant" id="photo_plant" class="form-control">								
 						</div>
