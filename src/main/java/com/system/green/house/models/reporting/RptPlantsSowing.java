@@ -9,13 +9,13 @@ private static final long serialVersionUID = 1L;
 	
 	
 	private String planta;
-	private BigInteger siembras;
+	private BigInteger cantidad_siembras;
 	
 
-	public RptPlantsSowing(String planta, BigInteger siembras) {
+	public RptPlantsSowing(String planta, BigInteger cantidad_siembras) {
 		super();
 		this.planta = planta;
-		this.siembras = siembras;
+		this.cantidad_siembras = cantidad_siembras;
 	}
 
 	public RptPlantsSowing() {
@@ -30,13 +30,15 @@ private static final long serialVersionUID = 1L;
 		this.planta = planta;
 	}
 
-	public BigInteger getSiembras() {
-		return siembras;
+	public BigInteger getCantidad_siembras() {
+		return cantidad_siembras;
 	}
 
-	public void setSiembras(BigInteger siembras) {
-		this.siembras = siembras;
+	public void setCantidad_siembras(BigInteger cantidad_siembras) {
+		this.cantidad_siembras = cantidad_siembras;
 	}
+
+
 
 	
 	
