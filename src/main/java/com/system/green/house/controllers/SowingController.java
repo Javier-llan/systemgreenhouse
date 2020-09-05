@@ -12,18 +12,16 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.system.green.house.models.entities.GreenHouse;
 import com.system.green.house.models.entities.Plant;
 import com.system.green.house.models.entities.Sowing;
+import com.system.green.house.models.reporting.RptPlantsSowing;
 import com.system.green.house.models.services.IGreenHouseService;
 import com.system.green.house.models.services.IPlantService;
 import com.system.green.house.models.services.ISowingService;
-
-
-
 
 @RequestMapping(value="/sowing")
 @Controller
@@ -148,5 +146,19 @@ public class SowingController {
 		return "sowing/list";
 	}
 	
+	@GetMapping(value = "/rptPlantsSowings")
+	public String rptPlantsSowings(Model model) {
+		return "sowing/rptplantsSowings";				
+	}
+	
+	@GetMapping(value = "/dataRptPlantadosSiembras", produces="application/json")
+	public @ResponseBody List<RptPlantsSowing> dataRptPlantadosSiembras(Model model) {				
+		try {			
+			return this.srvSowing.rptPlantadosSiembra();
+		} catch (Exception ex) {
+			System.out.println(ex.getMessage());
+			return null;
+		}		
+	}
 	
 }

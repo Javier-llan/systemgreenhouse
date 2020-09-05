@@ -1,6 +1,12 @@
 package com.system.green.house.models.services;
 
+import java.math.BigInteger;
 import java.util.List;
+import java.util.stream.Collectors;
+
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.StoredProcedureQuery;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -8,6 +14,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.system.green.house.models.dao.ISowing;
 import com.system.green.house.models.entities.Sowing;
+import com.system.green.house.models.reporting.RptPlantsSowing;
+
 
 
 
@@ -15,6 +23,9 @@ import com.system.green.house.models.entities.Sowing;
 public class SowingService implements ISowingService{
 	@Autowired 
 	private ISowing dao;
+	
+	@PersistenceContext
+	private EntityManager em; 
 	
 	@Override
 	@Transactional
@@ -55,6 +66,18 @@ public class SowingService implements ISowingService{
 			System.out.println("Error =>" + ex.getMessage());
 			return null;
 		}
+	}
+
+	@Override
+	@Transactional
+	public List<RptPlantsSowing> rptPlantadosSiembra() {
+		StoredProcedureQuery query = em.createStoredProcedureQuery("reporte_plants_sowing");
+		query.execute();
+		List<Object[]> datos = query.getResultList();		
+		return datos.stream()
+				.map(r -> new RptPlantsSowing((String)r[0], (BigInteger)r[1]))
+				.collect(Collectors.toList());	
+		
 	}
 
 }
