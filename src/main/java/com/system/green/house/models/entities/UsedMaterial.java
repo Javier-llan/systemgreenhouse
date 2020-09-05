@@ -11,13 +11,16 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+
+
 
 @Entity
 @Table(name="useds_materials")
 public class UsedMaterial implements Serializable{
  
 	private static final long serialVersionUID = 1L;
-	
+	/**Atributos tabla **/
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Basic(optional=false)
@@ -52,6 +55,7 @@ public class UsedMaterial implements Serializable{
 		this.quantityUsed = quantityUsed;
 	}
 	
+	/** Relaciones entre trablas **/
 	@JoinColumn(name="fk_chemical_material", referencedColumnName="pk_chemical_material")
 	@ManyToOne
 	private ChemicalAndMaterial materialsGreenHouse;
@@ -63,7 +67,6 @@ public class UsedMaterial implements Serializable{
 	public void setMaterialsGreenHouse(ChemicalAndMaterial materialsGreenHouse) {
 		this.materialsGreenHouse = materialsGreenHouse;
 	}
-
 	@JoinColumn(name="fk_maintenance_green_house",referencedColumnName="pk_maintenance_green_house")
 	@ManyToOne
 	private MaintenanceGreenHouse maintenancesGreenHouse;
@@ -75,5 +78,31 @@ public class UsedMaterial implements Serializable{
 	public void setMaintenancesGreenHouse(MaintenanceGreenHouse maintenancesGreenHouse) {
 		this.maintenancesGreenHouse = maintenancesGreenHouse;
 	}
+	
+	/** TRANSIENT **/
+	
+	@Transient
+	private int maintenanceGreenHouseid;
+	
+	@Transient
+	private int materialsGreenHouseid;
+
+	public int getMaintenanceGreenHouseid() {
+		return maintenanceGreenHouseid;
+	}
+
+	public void setMaintenanceGreenHouseid(int maintenanceGreenHouseid) {
+		this.maintenanceGreenHouseid = maintenanceGreenHouseid;
+	}
+
+	public int getMaterialsGreenHouseid() {
+		return materialsGreenHouseid;
+	}
+
+	public void setMaterialsGreenHouseid(int materialsGreenHouseid) {
+		this.materialsGreenHouseid = materialsGreenHouseid;
+	}
+	
+	
 	
 }

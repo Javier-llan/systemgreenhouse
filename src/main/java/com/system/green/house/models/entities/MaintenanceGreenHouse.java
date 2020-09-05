@@ -1,6 +1,7 @@
 package com.system.green.house.models.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
@@ -102,13 +103,16 @@ public class MaintenanceGreenHouse implements Serializable{
 	private List<UsedMaterial>usedMaterial;
 
 	public List<UsedMaterial> getUsedMaterial() {
+		if(usedMaterial == null)
+			usedMaterial = new ArrayList<UsedMaterial>();
+		
 		return usedMaterial;
 	}
 
 	public void setUsedMaterial(List<UsedMaterial> usedMaterial) {
 		this.usedMaterial = usedMaterial;
 	}
-
+	
 	@JoinColumn(name="fk_green_house",referencedColumnName = "pk_green_house")
 	@ManyToOne
 	private GreenHouse greenHouse;
@@ -119,11 +123,7 @@ public class MaintenanceGreenHouse implements Serializable{
 
 	public void setGreenHouse(GreenHouse greenHouse) {
 		this.greenHouse = greenHouse;
-	}
-	
-	
-	
-	
+	}	
 	
 }
 

@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -110,5 +111,11 @@ try {
 		model.addAttribute("chemicalAndMaterials", chemicalAndMaterials);
 		model.addAttribute("title", "Lista de quimicos y materiales");
 		return "chemicalandmaterial/list";
+	}
+	
+	@GetMapping(value="/search/{criteria}", produces="application/json")
+	public @ResponseBody List<ChemicalAndMaterial> search(@PathVariable(value="criteria") String criteria, Model model){
+		List<ChemicalAndMaterial> lista = this.srvChemicalAndMaterial.findByName(criteria);
+		return lista;
 	}
 }

@@ -187,7 +187,9 @@ public class ChemicalAndMaterial implements Serializable{
 		this.chemicalUsed = chemicalUsed;
 	}
 
-	
-
-		
+	@Override
+	public String toString() {
+		return super.toString();
+	}
+			
 }

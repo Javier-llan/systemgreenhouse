@@ -1,6 +1,9 @@
 package com.system.green.house.controllers;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,11 +13,17 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.system.green.house.models.entities.ChemicalAndMaterial;
 import com.system.green.house.models.entities.GreenHouse;
 import com.system.green.house.models.entities.MaintenanceGreenHouse;
+import com.system.green.house.models.entities.UsedMaterial;
+import com.system.green.house.models.services.IChemicalAndMaterialService;
 import com.system.green.house.models.services.IGreenHouseService;
 import com.system.green.house.models.services.IMaintenanceGreenHouseService;
 
@@ -28,10 +37,14 @@ public class MaintenanceGreenHouseController {
 	@Autowired
 	private IGreenHouseService srvGreenHouse;
 	
+	@Autowired
+	private IChemicalAndMaterialService srvChemicalAndMaterial;
+	
 	
 	@GetMapping(value="/create")
 	public String create(Model model) {
 		MaintenanceGreenHouse maintenanceGreenHouses = new MaintenanceGreenHouse();
+		maintenanceGreenHouses.setUsedMaterial(new ArrayList<UsedMaterial>());
 		model.addAttribute("title","Registro de nuevo mantenimiento");
 		model.addAttribute("maintenanceGreenHouse",maintenanceGreenHouses);
 		List<GreenHouse> greenHouses = srvGreenHouse.findAll();
@@ -68,8 +81,8 @@ public class MaintenanceGreenHouseController {
 	
 
 	@PostMapping(value="/save")
-	public String save(@Validated MaintenanceGreenHouse maintenanceGreenHouses, BindingResult result, Model model, RedirectAttributes flash) {
-try {
+	public String save(@Validated MaintenanceGreenHouse maintenanceGreenHouses, BindingResult result, Model model, RedirectAttributes flash, SessionStatus status, HttpSession session) {
+    try {
 			
 			String message = "Mantenimiento agregado correctamente";
 			String titulo = "Nuevo registro de Mantenimiento";
@@ -81,13 +94,18 @@ try {
 						
 			if(result.hasErrors()) {
 				model.addAttribute("title", titulo);
+				model.addAttribute("error","Error al registrar el mantenimiento");
 				List<GreenHouse> greenHouses= srvGreenHouse.findAll();
 				model.addAttribute("greenHouse",greenHouses);
 				return "maintenancegreenhouse/form";				
 			}
 			
-														
+			MaintenanceGreenHouse maintenanceSession = (MaintenanceGreenHouse) session.getAttribute("Mantenimiento");
+			for(UsedMaterial usedmaterials : maintenanceSession.getUsedMaterial()) {
+				maintenanceGreenHouses.getUsedMaterial().add(usedmaterials);
+			}
 			srvMaintenanceGreenHouse.save(maintenanceGreenHouses);	
+			status.setComplete();
 			flash.addFlashAttribute("success", message);
 		}
 		catch(Exception ex) {
@@ -117,4 +135,27 @@ try {
 		return "maintenancegreenhouse/list";		
 	
 	}
+	
+	@PostMapping(value = "/add", produces = "application/json")
+	public @ResponseBody Object add(@RequestBody @Validated UsedMaterial usedMaterials, BindingResult result, Model model, HttpSession session) {
+		try {
+			ChemicalAndMaterial materials = this.srvChemicalAndMaterial.findById(usedMaterials.getMaterialsGreenHouseid());
+			usedMaterials.setMaterialsGreenHouse(materials);
+			MaintenanceGreenHouse maintenances = (MaintenanceGreenHouse) session.getAttribute("Mantenimientos");
+			maintenances.getUsedMaterial().add(usedMaterials);
+			return usedMaterials;
+		} catch (Exception e) {
+			// TODO: handle exception
+			return e;
+		}
+	}
+	
+	@GetMapping(value = "chemicalandmaterials")
+	public String chemicalAndMaterials(Model model, HttpSession session) {
+		MaintenanceGreenHouse maintenances = (MaintenanceGreenHouse) session.getAttribute("Mantenimientos");
+		model.addAttribute("materiales", maintenances.getUsedMaterial());
+		model.addAttribute("title","Listado de Materiales");
+		return "usedmaterials/list";
+	}
+	
 }
