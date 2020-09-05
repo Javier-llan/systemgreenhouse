@@ -12,7 +12,7 @@ function report(){
 			$.each(response, function(i, item){
 				console.log(item);
 				toData.push(item.siembras);
-				toLabels.push(item.planta);						
+				toLabels.push(item.nombre_planta);						
 				toColors.push(getRandomColor());
 			});
 									
@@ -20,8 +20,8 @@ function report(){
 				labels: toLabels,
 				datasets: [{
 					label: 'Plantas',
-					backgroundColor: getRandomColor(),
-					borderColor: getRandomColor(),
+					backgroundColor: Color(getRandomColor()).alpha(0.5).rgbString(),
+					borderColor: Color(getRandomColor()).alpha(0.5).rgbString(),
 					borderWidth: 1,
 					data: toData
 				}]
@@ -40,7 +40,7 @@ function report(){
 						},
 						title: {
 							display: true,
-							text: 'Matrículas por materia y por usuario'
+							text: 'Reporte de plantas sembradas'
 						}
 					}
 				});
