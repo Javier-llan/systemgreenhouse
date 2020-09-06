@@ -32,7 +32,7 @@ public class GreenHouse implements Serializable{
 	private Double dimensionGreenHouse;
 	
 	@Column(name="condition_green_house")
-	private String conditionGreenHouse;
+	private Integer conditionGreenHouse;
 	
 	@Column(name="caliber_ceiling_lateral")
 	private Integer caliberCeilingLateral;
@@ -76,11 +76,11 @@ public class GreenHouse implements Serializable{
 		this.dimensionGreenHouse = dimensioGreenHouse;
 	}
 
-	public String getConditionGreenHouse() {
+	public Integer getConditionGreenHouse() {
 		return conditionGreenHouse;
 	}
 
-	public void setConditionGreenHouse(String conditionGreenHouse) {
+	public void setConditionGreenHouse (Integer conditionGreenHouse) {
 		this.conditionGreenHouse = conditionGreenHouse;
 	}
 

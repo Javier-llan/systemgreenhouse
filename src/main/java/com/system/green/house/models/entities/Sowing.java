@@ -63,6 +63,25 @@ public class Sowing implements Serializable{
 		this.plantid = plantid;
 	}
 
+	@Transient
+	private int greenhouseid;
+		
+	public int getGreenhouseid() {
+		return greenhouseid;
+	}
+
+	public void setGreenhouseid(int greenhouseid) {
+		this.greenhouseid = greenhouseid;
+	}
+
+	public GreenHouse getGreenHouses() {
+		return greenHouses;
+	}
+
+	public void setGreenHouses(GreenHouse greenHouses) {
+		this.greenHouses = greenHouses;
+	}
+
 	public Sowing() {
 		super();
 	}

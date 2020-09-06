@@ -9,6 +9,8 @@ import org.springframework.transaction.annotation.Transactional;
 import com.system.green.house.models.dao.IGreenHouse;
 import com.system.green.house.models.entities.GreenHouse;
 
+
+
 @Service
 public class GreenHouseService implements IGreenHouseService{
 
@@ -39,4 +41,9 @@ public class GreenHouseService implements IGreenHouseService{
 		return (List<GreenHouse>) dao.findAll();
 	}
 
+	@Override
+	@Transactional
+	public List<GreenHouse> findByInvernadero(Integer id) {
+		return (List<GreenHouse>) dao.findByInvernadero(id);
+	}
 }

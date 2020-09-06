@@ -11,10 +11,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.system.green.house.models.entities.GreenHouse;
 import com.system.green.house.models.services.IGreenHouseService;
+
+
 
 @RequestMapping(value="/greenhouse")
 @Controller
@@ -91,5 +94,12 @@ try {
 		model.addAttribute("greenHouses", greenHouses);
 		model.addAttribute("title", "Listado de Invernaderos");
 		return "greenhouse/list";
+	}
+	
+	@GetMapping(value="/search/{criteria}", produces="application/json")
+	public @ResponseBody List<GreenHouse> search(@PathVariable(value="criteria") Integer criteria, 
+			Model model) {
+		List<GreenHouse> list = srvGreenHouse.findByInvernadero(criteria);		
+		return list;		
 	}
 }

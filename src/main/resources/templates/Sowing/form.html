@@ -5,14 +5,36 @@
 		th:object="${sowing}" th:action="@{/sowing/save}" method="post">
 
 		
-		<hr>
-		<div class="row d-flex align-items-center">
-			<div class="form-group row">
+		
+		<div class="form-group row">
 				<div class="content col-sm-1">
-					<i class="fas fa-calendar-alt" title="Fecha de creación de la siembra"></i>
+					<i class="fas fa-calendar-alt"
+						title="Fecha de creación de la siembra"></i>
 				</div>
 				<div class="content col-sm-10">
-				<h5>Fecha de creación</h5>
+					<h5>Invernadero</h5>
+					 <select th:field="*{greenhouseid}" class="form-control">
+
+
+					<option th:each="gh : ${greenHousesl}" th:value="${gh.idgreenHouse}"
+						th:text="${gh.nameGreenHouse}"
+						th:selected="${greenhouseid == gh.idgreenHouse}"></option>
+				</select>
+				</div>
+			</div>
+		
+		
+		<hr>
+		<div class="row d-flex align-items-center">
+			
+			
+			<div class="form-group row">
+				<div class="content col-sm-1">
+					<i class="fas fa-calendar-alt"
+						title="Fecha de creación de la siembra"></i>
+				</div>
+				<div class="content col-sm-10">
+					<h5>Fecha de creación</h5>
 					<input class="form-control" type="date" th:field="*{dateSowing}"
 						th:errorclass="'form-control is-invalid'"
 						placeholder="Fecha de creación" /> <small
@@ -142,8 +164,8 @@
 			<br />
 
 		</div>
-		<input type="hidden" th:field="*{plantid}" /> 
-		<input type="hidden" th:field="*{idsowing}" />
+		<input type="hidden" th:field="*{plantid}" /> <input type="hidden"
+			th:field="*{idsowing}" />
 
 	</form>
 

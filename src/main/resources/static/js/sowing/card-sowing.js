@@ -1,4 +1,27 @@
-
+function searchByInvernadero(){
+	var criteria = $("#txtInvernadero").val();
+	$.ajax({
+		url : "/greenhouse/search/" + criteria,
+		method : 'GET',
+		success : function(response){
+			$("#greenhouseid").empty();			
+			var count = Object.keys(response).length;			
+			if(count > 0){								
+				$("#greenhouseid").addClass('visible').removeClass('invisible');
+				$.each( response, function(index, green_houses ) {					
+					$("#greenhouseid").append("<option value='"+ idgreenHouse +"'>" + nameGreenHouse + "</option>");					
+				});
+			}
+			else{
+				$("#greenhouseid").addClass('invisible').removeClass('visible');
+				console.log("No hay materias para el nivel: " + criteria);				
+			}			
+		},
+		error : function(err){
+			console.error(err);
+		}		
+	});
+}
 
 function save(){	
 	var dataForm = objectifyForm($("#frmSowing").serializeArray());	

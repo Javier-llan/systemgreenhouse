@@ -38,7 +38,7 @@ public class SpringSecurityConfiguration extends WebSecurityConfigurerAdapter {
 			.antMatchers("/usuario/**").anonymous()
 			.antMatchers("/plant/**").hasAnyRole("USER")
 			.antMatchers("/sowing/**").hasAnyRole("USER")
-			.antMatchers("/greenhouse/**").hasAnyRole("ADMIN")
+			.antMatchers("/greenhouse/**").hasAnyRole("ADMIN","USER")
 			.antMatchers("/chemicalandmaterial/**").hasAnyRole("ADMIN")
 			.antMatchers("/maintenancegreenhouse/**").hasAnyRole("ADMIN") 
 			.antMatchers("/usedmaterial/**").hasAnyRole("ADMIN")

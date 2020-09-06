@@ -36,17 +36,6 @@ public class SowingController {
 	private IGreenHouseService srvGreenHouse;
 	
 	
-	@GetMapping(value="/create")
-	public String create(Model model) {
-		Sowing sowings = new Sowing();
-		model.addAttribute("title","Register for new Sowing");
-		model.addAttribute("sowing",sowings);
-		List<Plant> plants = srvPlant.findAll();
-		model.addAttribute("plants",plants);
-		List<GreenHouse> greenHouses = srvGreenHouse.findAll();
-		model.addAttribute("greenhouses",greenHouses);
-		return "sowing/form";
-	}
 	
 	
 	@GetMapping(value="/create/{id}")
@@ -55,8 +44,8 @@ public class SowingController {
 		sowings.setPlantid(id);
 		model.addAttribute("title","Register for new Sowing");
 		model.addAttribute("sowing", sowings);		
-		List<GreenHouse> greenHouses = srvGreenHouse.findAll();
-		model.addAttribute("greenHouses",greenHouses);
+		List<GreenHouse> greenHousesl = srvGreenHouse.findAll();
+		model.addAttribute("greenHousesl",greenHousesl);
 		return "sowing/form";
 	}
 	
@@ -103,8 +92,8 @@ public class SowingController {
 				
 				Plant plants = this.srvPlant.findById(sowings.getPlantid());
 				sowings.setPlants(plants);
-				List<GreenHouse> greenHouses= srvGreenHouse.findAll();
-				model.addAttribute("greenHouses",greenHouses);
+				GreenHouse greenhouses = this.srvGreenHouse.findById(sowings.getGreenhouseid());
+				sowings.setGreenHouses(greenhouses);
 				this.srvSowing.save(sowings);
 				flash.addAttribute("succes","Succesfull the register was saved");
 				return "sowing/list";
