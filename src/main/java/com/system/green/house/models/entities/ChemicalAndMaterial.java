@@ -1,6 +1,7 @@
 package com.system.green.house.models.entities;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.Calendar;
 import java.util.List;
 
@@ -62,6 +63,20 @@ public class ChemicalAndMaterial implements Serializable{
 	
 	@Column(name="commentary")
 	private String commentary;
+	
+	@Column(name = "creado_en")
+	private LocalDateTime creadoEn;
+
+	@Column(name = "creado_por")
+	private String creadoPor;
+
+	@Column(name = "modificado_en")
+	private LocalDateTime modificadoEn;
+
+	@Column(name = "modificado_por")
+	private String modificadoPor;
+	
+	
 	
 	public ChemicalAndMaterial() {
 		super();
@@ -162,6 +177,40 @@ public class ChemicalAndMaterial implements Serializable{
 	public void setImage_chemicalmaterial(String image_chemicalmaterial) {
 		this.image_chemicalmaterial = image_chemicalmaterial;
 	}
+	
+	
+	public LocalDateTime getCreadoEn() {
+		return creadoEn;
+	}
+
+	public void setCreadoEn(LocalDateTime creadoEn) {
+		this.creadoEn = creadoEn;
+	}
+
+	public String getCreadoPor() {
+		return creadoPor;
+	}
+
+	public void setCreadoPor(String creadoPor) {
+		this.creadoPor = creadoPor;
+	}
+
+	public LocalDateTime getModificadoEn() {
+		return modificadoEn;
+	}
+
+	public void setModificadoEn(LocalDateTime modificadoEn) {
+		this.modificadoEn = modificadoEn;
+	}
+
+	public String getModificadoPor() {
+		return modificadoPor;
+	}
+
+	public void setModificadoPor(String modificadoPor) {
+		this.modificadoPor = modificadoPor;
+	}
+
 
 	@JsonIgnore
 	@OneToMany(mappedBy="materialsGreenHouse", fetch=FetchType.LAZY)

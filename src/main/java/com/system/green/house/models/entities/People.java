@@ -1,21 +1,18 @@
 package com.system.green.house.models.entities;
 
-import javax.persistence.Basic;
+import java.time.LocalDateTime;
+
 import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
+import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
+
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 
 @MappedSuperclass
 public abstract class  People {
 
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Basic(optional=false)
-	
-	@Column(name="pk_people")
-	private Integer idpeople;
 	
 	@Column(name="name")
 	private String name;
@@ -35,24 +32,27 @@ public abstract class  People {
 	@Column(name="addres")
 	private String addres;
 	
+	@Column(name = "creado_en")
+	private LocalDateTime creadoEn;
+
+	@Column(name = "creado_por")
+	private String creadoPor;
+
+	@Column(name = "modificado_en")
+	private LocalDateTime modificadoEn;
+
+	@Column(name = "modificado_por")
+	private String modificadoPor;
+	
 	public People() {
 		super();
 	}
 	
 	public People(Integer id) {
 		super();
-		this.idpeople=id;
+	
 	}
 	
-	
-
-	public Integer getIdpeople() {
-		return idpeople;
-	}
-
-	public void setIdpeople(Integer idpeople) {
-		this.idpeople = idpeople;
-	}
 
 	public String getName() {
 		return name;
@@ -101,10 +101,58 @@ public abstract class  People {
 	public void setAddres(String addres) {
 		this.addres = addres;
 	}
+	
+	
+
+	public LocalDateTime getCreadoEn() {
+		return creadoEn;
+	}
+
+	public void setCreadoEn(LocalDateTime creadoEn) {
+		this.creadoEn = creadoEn;
+	}
+
+	public String getCreadoPor() {
+		return creadoPor;
+	}
+
+	public void setCreadoPor(String creadoPor) {
+		this.creadoPor = creadoPor;
+	}
+
+	public LocalDateTime getModificadoEn() {
+		return modificadoEn;
+	}
+
+	public void setModificadoEn(LocalDateTime modificadoEn) {
+		this.modificadoEn = modificadoEn;
+	}
+
+	public String getModificadoPor() {
+		return modificadoPor;
+	}
+
+	public void setModificadoPor(String modificadoPor) {
+		this.modificadoPor = modificadoPor;
+	}
 
 	@Override
 	public String toString() {
 		
 		return this.getLastName()+" "+this.getName();
+	}
+	
+	@PrePersist
+	public void prePersist() {
+		creadoEn = LocalDateTime.now();
+		SecurityContext context = SecurityContextHolder.getContext();
+        creadoPor = context.getAuthentication().getName();
+	}
+
+	@PreUpdate
+	public void preUpdate() {
+		modificadoEn = LocalDateTime.now();
+		SecurityContext context = SecurityContextHolder.getContext();
+        modificadoPor = context.getAuthentication().getName();
 	}
 }

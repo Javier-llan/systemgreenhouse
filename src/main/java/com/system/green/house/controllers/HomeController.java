@@ -16,8 +16,8 @@ public class HomeController {
 	@GetMapping(value= {"/","/home.html"})
 	public String home(Model model) {
 		model.addAttribute("framework","Spring Boot");
-		model.addAttribute("main","Taller en clases");
-		model.addAttribute("description","Front - End");
+		model.addAttribute("main","Proyecto de certificación");
+		model.addAttribute("description","Gestion de Invernaderos");
 		return "home";
 	}
 	

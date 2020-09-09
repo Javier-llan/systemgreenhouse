@@ -9,4 +9,5 @@ public interface IChemicalAndMaterialService {
 	public ChemicalAndMaterial findById(Integer id);
 	public void delete(Integer id);
 	public List<ChemicalAndMaterial> findAll();
+	public List<ChemicalAndMaterial> findByName(String materialName);
 }

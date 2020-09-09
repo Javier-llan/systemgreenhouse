@@ -17,7 +17,7 @@
 					</div>
 					<h3 class="card-title col-sm-10" th:text="${title}"></h3>					
 				</div>	
-				<form th:action="@{/maintenancegreenhouse/save}" th:object="${maintenanceGreenHouse}" method="post">
+				<form th:action="@{/maintenancegreenhouse/save}" th:object="${MaintenanceGreenHouse}" enctype="multipart/form-data" method="post">
 				
 			
 				 			
@@ -83,18 +83,12 @@
 							<label class="h5 col-form-label">&nbsp;Invernadero:</label>						
 						</div>
 						<div class="content col-sm-6">							
-							<select class="form-control" th:field="*{greenHouse.idgreenHouse}">
-								<option value=0>--Seleccione--</option>
-								<option th:each="green : ${greenHouses}"								 
-								th:value="${green.idgreenHouse}" 
-								th:text="${green.nameGreenHouse}"
-								th:selected="${maintenanceGreenHouse.greenHouse.idgreenHouse == green.idgreenHouse}"></option>
-							</select>
-								
-								<small class="invalid-feedback"
-								th:if="${#fields.hasErrors('greenHouse.idgreenHouse')}"
-								th:errors="*{greenHouse.idgreenHouse}"
-								></small>									
+							
+								<select class="form-control" th:field="*{GreenHouse.idgreenHouse}">
+										<option value="">-- Seleccione Invernadero --</option>
+										<option th:each="gh : ${GreenHouse}" th:value="${gh.idgreenHouse}" th:text="${gh.nameGreenHouse}"></option>
+								</select>
+												
 						</div>
 					</div>
 					
@@ -120,27 +114,67 @@
 					<hr />
 			
 					
-					<div class="form-group row">
-						<div class="col-sm-4">
-							<a class="btn btn-danger" 
-								th:href="@{/maintenancegreenhouse/list}">
-							<i class="fas fa-minus-circle"></i>&nbsp;Cancelar</a>
-							<button class="btn btn-success" type="submit">
-								<i class="fas fa-plus-circle"></i>&nbsp;Guardar
-							</button>
-						</div>
-					</div>
+					<div class="d-flex justify-content-end">
+												<button class="btn btn-sm academy-btn btn-3" type="submit">
+													<i class="fas fa-save"></i> &nbsp;Guardar
+												</button>
+												<button class="btn btn-sm academy-btn btn-2 ml-2"
+													type="reset">
+													<i class="fas fa-times"></i> &nbsp;Cancelar
+												</button>
+												<a th:href="@{/maintenancegreenhouse/list}"
+													class="btn btn-sm academy-btn btn-4 ml-2" type="reset"><i
+													class="fas fa-users"></i> &nbsp;Volver</a>
+											</div>
 					<input type="hidden" th:field="*{idMaintenaceGreenHouse}" />
 							
 				
 				</form>
 				
+				<div class="row">
+						<div class="col-10">
+							<h4>Materiales </h4>												
+						</div>
+						<div class="col-2">										
+							<button class="btn btn-xs academy-btn btn-3" id="btnAdd" data-toggle="modal" data-target="#modalMaterial"><i class="fas fa-plus-circle"></i>&nbsp;Nuevo</button>
+						</div>										
+					</div>										
+				<div id="listMateriales"></div>
+
 			</div>
 		</div>
+	
+		
+	<hr>
+	</div>
+			
+	<div class="modal fade" id="modalMaterial" tabindex="-1" role="dialog"
+		aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title">Agregar material o quimico</h5>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body contact-area contact-content-modal" id="contentFrmUsedMaterial">
+				</div>
+				<div class="modal-footer">
+					<button id="btnSubmit" type="button" class="btn btn-sm academy-btn btn-3" data-dismiss="modal">Guardar</button>
+					<button type="button" class="btn btn-sm academy-btn btn-2"
+						data-dismiss="modal">Cancelar</button>
+				</div>
 			</div>
-			<footer th:replace="layout :: frgFooter"></footer>
 		</div>
 	</div>
-</div>
+			<div th:replace="layout :: frgFooter"></div>
+            <div th:replace="layout :: frgScripts"></div>
+	<script th:src="@{/js/maintenancegreenhouse/add-usedmaterial.js}"></script>
+	<script th:src="@{/js/usedmaterial/card-usedmaterial.js}"></script>
+		</div>
+	</div>
+	</div>
 </body>
 </html>

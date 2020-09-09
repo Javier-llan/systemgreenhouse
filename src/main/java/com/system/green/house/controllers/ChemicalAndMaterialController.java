@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -23,6 +25,7 @@ import com.system.green.house.models.entities.ChemicalAndMaterial;
 import com.system.green.house.models.services.IChemicalAndMaterialService;
 
 @RequestMapping(value="/chemicalandmaterial")
+@SessionAttributes("chemicalAndMaterial")
 @Controller
 public class ChemicalAndMaterialController {
 
@@ -104,11 +107,17 @@ try {
 		return "redirect:/chemicalandmaterial/list";
 	}
 	
-	@GetMapping(value="/list")
+	@GetMapping(value={"/","/list"})
 	public String list(Model model) {
 		List<ChemicalAndMaterial> chemicalAndMaterials = srvChemicalAndMaterial.findAll();
 		model.addAttribute("chemicalAndMaterials", chemicalAndMaterials);
 		model.addAttribute("title", "Lista de quimicos y materiales");
 		return "chemicalandmaterial/list";
+	}
+	
+	@GetMapping(value="/search/{filtro}",produces = "application/json")
+	public @ResponseBody List<ChemicalAndMaterial> search(@PathVariable(value="filtro") String filtro, Model model){
+		List<ChemicalAndMaterial> lista = this.srvChemicalAndMaterial.findByName(filtro);
+		return lista;
 	}
 }

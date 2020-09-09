@@ -31,7 +31,7 @@
 						</tr>
 					</thead>
 					<tbody>						
-						<tr th:each="maintenance : ${maintenanceGreenHouses}">
+						<tr th:each="maintenance : ${MaintenanceGreenHouse}">
 								<td th:text="${#dates.format(maintenance.dateMaintenanceGreenHouse,'dd-MM-yyy')}"></td>
 								<td th:text=${maintenance.descriptionMaintenaceGreenHouse}></td>
 								<td th:text=${maintenance.conditionMaintenanceGreenHouse}></td>

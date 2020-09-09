@@ -38,5 +38,11 @@ public class ChemicalAndMaterialService implements IChemicalAndMaterialService{
 	public List<ChemicalAndMaterial> findAll() {
 		return (List<ChemicalAndMaterial>) dao.findAll();
 	}
+	
+	@Override
+	@Transactional
+	public List<ChemicalAndMaterial> findByName(String materialName){
+		return dao.findByName(materialName);
+	}
 
 }

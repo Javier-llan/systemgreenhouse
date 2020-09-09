@@ -40,7 +40,7 @@
 									<div class="academy-tab-text">
 										<div class="contact-form-area wow fadeInUp"
 											data-wow-delay="500ms">
-											<form th:object="${maintenanceGreenHouse}" method="post">
+											<form th:object="${MaintenanceGreenHouse}" method="post">
 												<div class="row d-flex align-items-center">
 													<div class="col-2">
 														<i><strong>Fecha Mantenimiento: </strong></i>
@@ -116,7 +116,7 @@
 					</div>
 				</div>
 				<input type="hidden" id="idMaintenaceGreenHouse"
-					th:value="${maintenanceGreenHouse.idMaintenaceGreenHouse}" />
+					th:value="${MaintenanceGreenHouse.idMaintenaceGreenHouse}" />
 				<hr />
 				
 			</div>
@@ -134,7 +134,7 @@
 					
 					<div class="modal-footer">						
 						<button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
-						<a th:href="@{/maintenancegreenhouse/delete/} + ${maintenanceGreenHouse.idMaintenaceGreenHouse}" class="btn btn-success">Confirmar</a>
+						<a th:href="@{/maintenancegreenhouse/delete/} + ${MaintenanceGreenHouse.idMaintenaceGreenHouse}" class="btn btn-success">Confirmar</a>
 					</div>
 				</div>
 			</div>

@@ -7,7 +7,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.system.green.house.models.dao.IMaintenanceGreenHouse;
+import com.system.green.house.models.dao.IUsedMaterial;
 import com.system.green.house.models.entities.MaintenanceGreenHouse;
+import com.system.green.house.models.entities.UsedMaterial;
 
 @Service
 public class MaintenanceGreenHouseService implements IMaintenanceGreenHouseService{
@@ -15,10 +17,22 @@ public class MaintenanceGreenHouseService implements IMaintenanceGreenHouseServi
 	@Autowired 
 	private IMaintenanceGreenHouse dao;
 	
+	@Autowired
+	private IUsedMaterial daomaterial;
+	
 	@Override
 	@Transactional
 	public void save(MaintenanceGreenHouse m) {
-		dao.save(m);
+		try {
+			dao.save(m);
+			for(UsedMaterial um : m.getUsedMaterial()) {
+				um.setMaintenancesGreenHouse(m);
+				daomaterial.save(um);
+			}
+		} catch (Exception ex) {
+			// TODO: handle exception
+			throw ex;
+		}
 	}
 
 	@Override
