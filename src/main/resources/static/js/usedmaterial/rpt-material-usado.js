@@ -1,6 +1,6 @@
-function report(){	
+function reportmu(){	
 	$.ajax({
-		url : "/sowing/dataRptPlantadosSiembras",
+		url : "/usedmaterial/dataRptMaterialesUsados",
 		method : 'GET',
 		success : function(response){
 			console.log(response);
@@ -11,15 +11,15 @@ function report(){
 			
 			$.each(response, function(i, item){
 				console.log(item);
-				toData.push(item.siembras);
-				toLabels.push(item.nombre_planta);						
+				toData.push(item.cantidad);
+				toLabels.push(item.nombre);						
 				toColors.push(getRandomColor());
 			});
 									
-			var barChartData = {
+			var datos = {
 				labels: toLabels,
 				datasets: [{
-					label: 'Plantas',
+					label: 'Materiales',
 					backgroundColor: getRandomColor(),
 					borderColor: getRandomColor(),
 					borderWidth: 1,
@@ -29,20 +29,11 @@ function report(){
 			};
 
 			
-				var ctx = document.getElementById('reporteSiembras').getContext('2d');
-				window.myBar = new Chart(ctx, {
-					type: 'bar',
-					data: barChartData,
-					options: {
-						responsive: true,
-						legend: {
-							position: 'top',
-						},
-						title: {
-							display: true,
-							text: 'Reporte de plantas sembradas'
-						}
-					}
+				var ctx = document.getElementById('rptmaterialUsado').getContext('2d');
+				window.myPieChart = new Chart(ctx, {
+					type: 'pie',
+					data: datos,
+					
 				});
 
 				
@@ -59,9 +50,8 @@ function report(){
 $(document).ready(function(){
 	
 	setTimeout(function() {
-		report();
+		reportmu();
 	},1000)
 
 	
 });
-
