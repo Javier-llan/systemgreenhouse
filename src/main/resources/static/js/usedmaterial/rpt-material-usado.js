@@ -12,21 +12,25 @@ function reportmu(){
 			$.each(response, function(i, item){
 				console.log(item);
 				toData.push(item.cantidad);
-				toLabels.push(item.nombre);						
-				toColors.push(getRandomColor());
+				toLabels.push(item.nombre);
+			
+				    toColors.push(getRandomColor());
+				  				
 			});
 									
 			var datos = {
 				labels: toLabels,
 				datasets: [{
 					label: 'Materiales',
-					backgroundColor: getRandomColor(),
-					borderColor: getRandomColor(),
+					backgroundColor:  ["rgb(255, 99, 132)","rgb(54, 162, 235)","rgb(255, 205, 86)","rgb(255, 60, 50)","rgb(255, 99, 71)","rgb(255, 255, 0)","rgb(0, 255, 0)","rgb(210, 105, 30)"],
+					borderColor:  Color(getRandomColor()).alpha(0.5).rgbString(),
 					borderWidth: 1,
 					data: toData
 				}]
 
 			};
+			
+			
 
 			
 				var ctx = document.getElementById('rptmaterialUsado').getContext('2d');
