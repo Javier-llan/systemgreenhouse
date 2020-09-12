@@ -60,11 +60,13 @@ $(document).ready(function(){
 	
 	$("#btnSubmit").click(function(){
 		save();	
-		location.reload();
+		
 	});
 	
 	$("#tab--2").click(function(){
-		list();		
+		
+		list();	
+		
 	});
 	
 });

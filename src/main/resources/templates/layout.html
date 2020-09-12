@@ -1,21 +1,21 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head th:fragment="frgHead">
+
 <meta charset="UTF-8">
 <title>Universidad de las Fuerzas Armadas</title>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3"></script>
 <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" />
 <link rel="stylesheet"
 	href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
 	integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU"
 	crossorigin="anonymous">
-
-
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
-<script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3"></script>
+
 </head>
 <body>
 	<header th:fragment="frgHeader" class="container">
+	
 		<br />
 		<nav class="navbar navbar-expand-md navbar-dark bg-dark">
 			<a class="navbar-brand" th:href="@{/}">Inicio</a>
@@ -173,6 +173,7 @@
     
     
     <div th:fragment="frgScripts">
+    
 		<script th:src="@{/js/jquery/jquery-2.2.4.min.js}"></script>
 		
 		

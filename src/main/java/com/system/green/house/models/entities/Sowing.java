@@ -2,18 +2,18 @@ package com.system.green.house.models.entities;
 
 import java.io.Serializable;
 import java.util.Calendar;
-import java.util.List;
+
 
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
+
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -132,40 +132,6 @@ public class Sowing implements Serializable{
 		this.plants = plants;
 	}
 	
-	@JoinColumn(name="fk_green_house", referencedColumnName = "pk_green_house")
-	@ManyToOne
-	private GreenHouse greenHouses;
-
-	public GreenHouse getGreenHouse() {
-		return greenHouses;
-	}
-
-	public void setGreenHouse(GreenHouse greenHouse) {
-		this.greenHouses = greenHouse;
-	}
-	
-	@OneToMany(mappedBy = "sowings", fetch = FetchType.LAZY)
-	private List<Harvest> harvest;
-
-	public List<Harvest> getHarvest() {
-		return harvest;
-	}
-
-	public void setHarvest(List<Harvest> harvest) {
-		this.harvest = harvest;
-	}
-	
-	@OneToMany(mappedBy = "sowing",fetch = FetchType.LAZY)
-	private List<TreatmentSowing> treatmentsSowing;
-
-
-	public List<TreatmentSowing> getTreatmentsSowing() {
-		return treatmentsSowing;
-	}
-
-	public void setTreatmentsSowing(List<TreatmentSowing> treatmentsSowing) {
-		this.treatmentsSowing = treatmentsSowing;
-	}
 	
 	
 	

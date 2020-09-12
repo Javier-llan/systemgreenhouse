@@ -123,16 +123,7 @@ public class GreenHouse implements Serializable{
 		this.maintenancesGreenHouse = maintenancesGreenHouse;
 	}
 	
-	@OneToMany(mappedBy = "greenHouses",fetch = FetchType.LAZY)
-	private List<Sowing> sowing;
-
-	public List<Sowing> getSowing() {
-		return sowing;
-	}
-
-	public void setSowing(List<Sowing> sowing) {
-		this.sowing = sowing;
-	}
+	
 	
 	
 	

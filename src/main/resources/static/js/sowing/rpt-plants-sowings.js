@@ -20,8 +20,8 @@ function report(){
 				labels: toLabels,
 				datasets: [{
 					label: 'Plantas',
-					backgroundColor: Color(getRandomColor()).alpha(0.5).rgbString(),
-					borderColor: Color(getRandomColor()).alpha(0.5).rgbString(),
+					backgroundColor: getRandomColor(),
+					borderColor: getRandomColor(),
 					borderWidth: 1,
 					data: toData
 				}]
@@ -29,7 +29,7 @@ function report(){
 			};
 
 			window.onload = function() {
-				var ctx = document.getElementById('canvas').getContext('2d');
+				var ctx = document.getElementById('reporteSiembras').getContext('2d');
 				window.myBar = new Chart(ctx, {
 					type: 'bar',
 					data: barChartData,
