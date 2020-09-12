@@ -71,7 +71,7 @@ public class SowingService implements ISowingService{
 	@Override
 	@Transactional
 	public List<RptPlantsSowing> rptPlantadosSiembra() {
-		StoredProcedureQuery query = em.createStoredProcedureQuery("cantidad_sowing");
+		StoredProcedureQuery query = em.createStoredProcedureQuery("reporte_plants_sowing");
 		query.execute();
 		List<Object[]> datos = query.getResultList();		
 		return datos.stream()
