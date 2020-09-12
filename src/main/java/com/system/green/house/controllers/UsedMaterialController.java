@@ -64,6 +64,7 @@ public class UsedMaterialController {
 	public @ResponseBody List<RptUsedsMaterials> dataRptMaterialesUsados(Model model) {				
 		try {			
 			return this.srvUsedMaterial.rptMaterialesUsados();
+			
 		} catch (Exception ex) {
 			System.out.println(ex.getMessage());
 			return null;

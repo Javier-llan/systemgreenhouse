@@ -12,6 +12,7 @@ function save(){
 		data : requestBody,
 		success : function(response){
 			console.log(response);
+			location.reload();
 		},
 		error : function(err){
 			console.log(err);
