@@ -76,7 +76,7 @@ public class UsedMaterialService implements IUsedMaterialService{
 		query.execute();
 		List<Object[]> datos = query.getResultList();		
 		return datos.stream()
-				.map(r -> new RptGreenHouseUsedMaterial((Integer)r[0], (String)r[1],(Integer)r[2]))
+				.map(r -> new RptGreenHouseUsedMaterial((String)r[0], (String)r[1],(Integer)r[2]))
 				.collect(Collectors.toList());	
 	}
 }

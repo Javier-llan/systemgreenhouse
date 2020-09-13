@@ -9,25 +9,25 @@ public class RptGreenHouseUsedMaterial implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
 	
-	private Integer id;
+	private String nombre;
 	private String tipomaterial;
 	private Integer cantidad;
 	
-	public RptGreenHouseUsedMaterial(Integer id, String tipomaterial, Integer cantidad) {
+	 public RptGreenHouseUsedMaterial(String nombre, String tipomaterial, Integer cantidad) {
 		super();
-		this.id=id;
-		this.tipomaterial=tipomaterial;
-		this.cantidad=cantidad;
+		this.nombre = nombre;
+		this.tipomaterial = tipomaterial;
+		this.cantidad = cantidad;
 	}
-	
-	 public RptGreenHouseUsedMaterial() {
+	public RptGreenHouseUsedMaterial() {
 		 super();
 	 }
-	public Integer getId() {
-		return id;
+	
+	public String getNombre() {
+		return nombre;
 	}
-	public void setId(Integer id) {
-		this.id = id;
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
 	}
 	public String getTipomaterial() {
 		return tipomaterial;

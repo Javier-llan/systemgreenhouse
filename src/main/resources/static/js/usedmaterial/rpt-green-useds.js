@@ -6,7 +6,7 @@ function report(){
 			console.log(response);
 			
 			var data = {};
-			var labels = response.map((item) => "Invernadero: "+ item.id);
+			var labels = response.map((item) => "Invernadero: "+ item.nombre);
 			labels = labels.filter((item, i) => labels.indexOf(item) == i);
 			
 			response.forEach(function(item) {
@@ -18,7 +18,7 @@ function report(){
 					}
 				}
 				
-				data[item.tipomaterial].ids.push(item.id);
+				data[item.tipomaterial].ids.push(item.nombre);
 				data[item.tipomaterial].cantidad.push(item.cantidad);
 			});
 			
