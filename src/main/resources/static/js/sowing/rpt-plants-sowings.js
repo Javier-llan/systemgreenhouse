@@ -20,32 +20,39 @@ function report(){
 				labels: toLabels,
 				datasets: [{
 					label: 'Plantas',
-					backgroundColor: Color(getRandomColor()).alpha(0.5).rgbString(),
-					borderColor: Color(getRandomColor()).alpha(0.5).rgbString(),
+					backgroundColor: getRandomColor(),
+					borderColor: getRandomColor(),
 					borderWidth: 1,
 					data: toData
 				}]
 
 			};
 
-			window.onload = function() {
-				var ctx = document.getElementById('canvas').getContext('2d');
+			
+				var ctx = document.getElementById('reporteSiembras').getContext('2d');
 				window.myBar = new Chart(ctx, {
 					type: 'bar',
 					data: barChartData,
 					options: {
-						responsive: true,
-						legend: {
-							position: 'top',
-						},
-						title: {
-							display: true,
-							text: 'Reporte de plantas sembradas'
-						}
-					}
+					responsive: true,
+					legend: {
+						position: 'top',
+					},
+					title: {
+						display: true,
+						text: 'Cantidad de siembras por planta'
+					},
+					scales: {
+				        yAxes: [{
+				            ticks: {
+				                beginAtZero: true
+				            }
+				        }]
+				    }
+				 }
 				});
 
-			};		
+				
 			
 		},
 		error : function(err){
@@ -58,7 +65,9 @@ function report(){
 
 $(document).ready(function(){
 	
-	report();		
+	setTimeout(function() {
+		report();
+	},1000)
 
 	
 });
