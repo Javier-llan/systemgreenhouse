@@ -34,15 +34,22 @@ function report(){
 					type: 'bar',
 					data: barChartData,
 					options: {
-						responsive: true,
-						legend: {
-							position: 'top',
-						},
-						title: {
-							display: true,
-							text: 'Reporte de plantas sembradas'
-						}
-					}
+					responsive: true,
+					legend: {
+						position: 'top',
+					},
+					title: {
+						display: true,
+						text: 'Cantidad de siembras por planta'
+					},
+					scales: {
+				        yAxes: [{
+				            ticks: {
+				                beginAtZero: true
+				            }
+				        }]
+				    }
+				 }
 				});
 
 				
