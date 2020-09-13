@@ -74,7 +74,7 @@ public class SowingService implements ISowingService{
 		query.execute();
 		List<Object[]> datos = query.getResultList();		
 		return datos.stream()
-				.map(r -> new RptPlantsSowing((String)r[0], (Integer)r[1]))
+				.map(r -> new RptPlantsSowing((String)r[0], (BigInteger)r[1]))
 				.collect(Collectors.toList());	
 		
 	}
