@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head th:replace="layout :: frgHead">
+</head>
+
+<body>
+ <div id="content-wrapper" class="d-flex flex-column">
+		<!-- Begin Page Content -->
+		<div class="container">
+			<div class="container-fluid">	
+ 	<div id="preloader">
+		<i class="circle-preloader"></i>
+	</div>
+	
+ 	<header th:replace="layout :: frgHeader"></header>
+ 
+ 		
+		<div class="bradcumbContent">
+			<h2>Reporte</h2>
+		</div>
+	
+    <canvas id="rptinvernaderoMaterial" style="display: block; width: 654px; height: 327px;" width="654" height="327" class="chartjs-render-monitor"></canvas> 
+    
+    <div class="academy-courses-area section-padding-100-0">
+        <div class="container">
+            <!-- div class="row">
+            	           	
+            </div> -->
+            <div class="row">
+            	
+                
+                
+            </div>
+        </div>
+    </div>
+    <br>
+</div>
+</div>
+</div>
+ <div th:replace="layout :: frgFooter"></div>
+ <div th:replace="layout :: frgScripts"></div>
+ <script th:src="@{/js/usedmaterial/rpt-green-useds.js}"></script>
+ 
+</body>
+
+</html>

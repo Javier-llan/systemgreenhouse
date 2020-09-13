@@ -18,42 +18,55 @@
 	
 		<br />
 		<nav class="navbar navbar-expand-md navbar-dark bg-dark">
-			<a class="navbar-brand" th:href="@{/}">Inicio</a>
-			<button class="navbar-toggler" type="button" data-toggle="collapse"
-				aria-label="Toggle navigation">
-				<span class="navbar-toggler-icon"></span>
-			</button>
-			<div class="collapse navbar-collapse">
-				<ul class="navbar-nav mr-auto">
-				
-					<li class="nav-item">
-					<a class="nav-link"th:href="@{/plant/list}">Planta</a>
-					</li>
-					
-					<li class="nav-item">
-					<a  class="nav-link" th:href="@{/sowing/rptPlantsSowings}">Siembras</a>
-					</li>
-					
-					<li class="nav-item">
-					<a class="nav-link"th:href="@{/greenhouse/list}">Invernadero</a>
-					</li>
-					<li class="nav-item">
-					<a class="nav-link"th:href="@{/chemicalandmaterial/list}">Quimicos y Materiales</a>
-					</li>
-					<li class="nav-item">
-					<a class="nav-link"th:href="@{/maintenancegreenhouse/list}">Mantenimiento Invernadero</a>
-					</li>
-					<li class="nav-item">
-					<a class="nav-link"th:href="@{/usedmaterial/rptUserMaintenanceCreadoPor}">Mantenimientos realizados</a>
-					</li>
-					
-					<li class="nav-item">
-					<a class="nav-link"th:href="@{/usedmaterial/rptMaterialUsado}">Materiales Usados</a>
-					</li>
-									
-				</ul>
-			</div>
-			<div class="login-content" sec:authorize="isAuthenticated()">
+		  <a class="navbar-brand" th:href="@{/}">Inicio</a>
+		  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+		    <span class="navbar-toggler-icon"></span>
+		  </button>
+  <div class="collapse navbar-collapse" id="navbarNavDropdown">
+    <ul class="navbar-nav">
+       <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Planta
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+          <a class="dropdown-item" th:href="@{/plant/create}">Registrar</a>
+          <a class="dropdown-item" th:href="@{/plant/list}">Listado</a>
+          <a class="dropdown-item" th:href="@{/sowing/rptPlantsSowings}">Reporte siembras</a>
+        </div>
+      </li>
+     <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Invernadero
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+          <a class="dropdown-item" th:href="@{/greenhouse/create}">Registrar</a>
+          <a class="dropdown-item" th:href="@{/greenhouse/list}">Listado</a>
+          <a class="dropdown-item" th:href="@{/usedmaterial/rptUserMaintenanceCreadoPor}">Reporte mantenimientos por usuario</a>
+          <a class="dropdown-item" th:href="@{/usedmaterial/rptGreenHouseUsedMaterial}">Reporte cantidad usada por invernadero</a>
+          <a class="dropdown-item" th:href="@{/usedmaterial/rptMaterialUsado}">Reporte porcentaje material usado</a>    
+        </div>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Mantenimiento Invernadero
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+          <a class="dropdown-item" th:href="@{/maintenancegreenhouse/create}">Registrar</a>
+          <a class="dropdown-item" th:href="@{/maintenancegreenhouse/list}">Listado</a>
+        </div>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Quimicos y Materiales
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+          <a class="dropdown-item" th:href="@{/chemicalandmaterial/create}">Registrar</a>
+          <a class="dropdown-item" th:href="@{/chemicalandmaterial/list}">Listado</a>
+        </div>
+      </li>  
+    </ul>
+  </div>
+  <div class="login-content" sec:authorize="isAuthenticated()">
 								<i class="fas fa-user"></i>&nbsp;<a href="#"><span
 									sec:authentication="name"></span></a>
 								<div sec:authorize="isAuthenticated()">
@@ -64,11 +77,11 @@
 											th:value="${_csrf.token}" />
 									</form>
 								</div>
-			</div>
+  </div>
 			<div class="login-content" sec:authorize="!isAuthenticated()">
 								<a th:href="@{/login}">Ingresar</a>
 			</div>
-	</nav>
+</nav>
 
 			<div id="success-alert" class="alert alert-success" role="alert"
                 th:if="${success != null}">

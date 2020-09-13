@@ -14,7 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.system.green.house.models.dao.IUsedMaterial;
 import com.system.green.house.models.entities.UsedMaterial;
-
+import com.system.green.house.models.reporting.RptGreenHouseUsedMaterial;
 import com.system.green.house.models.reporting.RptUsedsMaterials;
 import com.system.green.house.models.reporting.RptUserMaintenanceCreadoPor;
 
@@ -69,5 +69,14 @@ public class UsedMaterialService implements IUsedMaterialService{
 				.map(r -> new RptUsedsMaterials((String)r[0], (Double)r[1]))
 				.collect(Collectors.toList());	
 		
+	}
+	@Override
+	public List<RptGreenHouseUsedMaterial> rptGreenHouseUsedMaterials(){
+		StoredProcedureQuery query = em.createStoredProcedureQuery("reporte_invernadero_cantidad_usada");
+		query.execute();
+		List<Object[]> datos = query.getResultList();		
+		return datos.stream()
+				.map(r -> new RptGreenHouseUsedMaterial((Integer)r[0], (String)r[1],(Integer)r[2]))
+				.collect(Collectors.toList());	
 	}
 }

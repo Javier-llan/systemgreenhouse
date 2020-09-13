@@ -3,6 +3,7 @@ package com.system.green.house.models.services;
 import java.util.List;
 
 import com.system.green.house.models.entities.UsedMaterial;
+import com.system.green.house.models.reporting.RptGreenHouseUsedMaterial;
 import com.system.green.house.models.reporting.RptPlantsSowing;
 import com.system.green.house.models.reporting.RptUsedsMaterials;
 import com.system.green.house.models.reporting.RptUserMaintenanceCreadoPor;
@@ -14,4 +15,5 @@ public interface IUsedMaterialService {
 	public List<UsedMaterial> findAll();
 	public List<RptUserMaintenanceCreadoPor> rptUserMaintenanceCreadoPors();
 	public List<RptUsedsMaterials> rptMaterialesUsados();
+	public List<RptGreenHouseUsedMaterial> rptGreenHouseUsedMaterials();
 }
